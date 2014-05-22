@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.zts1993.bean.GreenUser" table="green_user" schema="" catalog="greenoathu">
+        <id name="userId" column="user_id"/>
+        <property name="userLogin" column="user_login"/>
+        <property name="userPass" column="user_pass"/>
+        <property name="userNicename" column="user_nicename"/>
+        <property name="userEmail" column="user_email"/>
+        <property name="userUrl" column="user_url"/>
+        <property name="userRegistered" column="user_registered"/>
+        <property name="userActivationKey" column="user_activation_key"/>
+        <property name="userStatus" column="user_status"/>
+        <property name="userIntro" column="user_intro"/>
+        <property name="userLevel" column="user_level"/>
+        <property name="userSession" column="user_session"/>
+    </class>
+</hibernate-mapping>
