@@ -1,5 +1,6 @@
 package com.zts1993.action.Login;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zts1993.bean.UserLogin;
 
@@ -23,12 +24,16 @@ public class Login extends ActionSupport {
     public String execute() throws Exception {
 
 
+        ActionContext.getContext().getSession().put("isLogin", "1");
+
+
         return "success";
 
 
     }
 
     public String loginPage() throws Exception {
+
 
         return "success";
 

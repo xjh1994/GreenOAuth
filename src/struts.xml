@@ -6,6 +6,9 @@
 
 <struts>
     <constant name="struts.ui.theme" value="simple"/>
+    <!--<constant name="struts.multipart.maxSize" value="100000000"></constant>-->
+
+
     <package name="index" namespace="/index" extends="struts-default">
         <action name="index" class="com.zts1993.action.Index.Index" method="indexPage">
             <result name="success">/page/index/indexPage.jsp</result>
@@ -16,6 +19,14 @@
 
 
     <package name="admin" namespace="/admin" extends="struts-default">
+        <global-results>
+            <result name="sql">/page/error/sql.jsp</result>
+            <result name="404">/page/error/404.jsp</result>
+
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.sql.SQLException" result="sql"></exception-mapping>
+        </global-exception-mappings>
         <action name="index" class="com.zts1993.action.Admin.Index" method="indexPage">
             <result name="success">/page/admin/indexPage.jsp</result>
         </action>
@@ -31,7 +42,7 @@
 
         <action name="loginHandle" class="com.zts1993.action.Login.Login">
             <!--<result name="success">/page/login/loginRes.jsp</result>-->
-            <result name="success" type="redirectAction" >
+            <result name="success" type="redirectAction">
                 <param name="namespace">/admin</param>
                 <param name="actionName">index</param>
 
