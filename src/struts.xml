@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.ui.theme" value="simple"/>
+    <package name="index" namespace="/index" extends="struts-default">
+        <action name="index" class="com.zts1993.action.Index.Index" method="indexPage">
+            <result name="success">/page/index/indexPage.jsp</result>
+        </action>
+
+
+    </package>
+
+
+    <package name="admin" namespace="/admin" extends="struts-default">
+        <action name="index" class="com.zts1993.action.Admin.Index" method="indexPage">
+            <result name="success">/page/admin/indexPage.jsp</result>
+        </action>
+
+
+    </package>
+
+    <package name="login" namespace="/login" extends="struts-default">
+
+        <action name="login" class="com.zts1993.action.Login.Login" method="loginPage">
+            <result name="success">/page/login/loginPage.jsp</result>
+        </action>
+
+        <action name="loginHandle" class="com.zts1993.action.Login.Login">
+            <!--<result name="success">/page/login/loginRes.jsp</result>-->
+            <result name="success" type="redirectAction" >
+                <param name="namespace">/admin</param>
+                <param name="actionName">index</param>
+
+            </result>
+        </action>
+
+
+    </package>
+
+</struts>
