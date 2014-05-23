@@ -8,17 +8,21 @@
 
         <!--need c3po-->
 
-        <property name="connection.url">jdbc:mysql://localhost:3306/greenoathu</property>
+        <property name="connection.url">jdbc:mysql://127.0.0.1/greenoathu</property>
         <property name="connection.username">zts1993</property>
         <property name="connection.password">262019</property>
         <!-- DB schema will be updated if needed -->
 
-        <property name="hibernate.c3p0.max_size">20</property>
-        <property name="hibernate.c3p0.min_size">1</property>
+        <!--<property name="hibernate.c3p0.max_size">20</property>-->
+        <!--<property name="hibernate.c3p0.min_size">1</property>-->
 
-        <property name="hibernate.c3p0.timeout">5000</property>
-        <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
-        <property name="hbm2ddl.auto">update</property>
+        <!--<property name="hibernate.c3p0.timeout">5000</property>-->
+
+        <property name="dialect">org.hibernate.dialect.MySQLMyISAMDialect</property>
+        <!--<property name="hbm2ddl.auto">update</property>-->
+        <property name="hibernate.show_sql">true</property>
+        
+        
         <mapping resource="mappings/user.cfg.xml"/>
         <mapping resource="mappings/opinion.cfg.xml"/>
 

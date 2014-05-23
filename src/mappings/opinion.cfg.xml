@@ -3,9 +3,9 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
+<!---->
     <class name="com.zts1993.bean.GreenOptions" table="green_options" schema="" catalog="greenoathu">
-        <id name="optionId" column="option_id"/>
+        <id name="optionId" column="option_id" />
         <property name="optionName" column="option_name"/>
         <property name="optionValue" column="option_value"/>
         <property name="autoload" column="autoload"/>

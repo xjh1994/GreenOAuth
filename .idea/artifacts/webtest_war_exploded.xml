@@ -11,6 +11,7 @@
           <element id="library" level="project" name="Struts 2-2.3.16.3" />
           <element id="library" level="project" name="Hibernate 3.6.10-3.6.10" />
           <element id="library" level="project" name="mysql-connector-java-5.0.7-bin" />
+          <element id="library" level="project" name="Spring-3.2.8.RELEASE" />
         </element>
       </element>
     </root>

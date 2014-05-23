@@ -64,4 +64,9 @@ public class GreenOptions {
         result = 31 * result + (autoload != null ? autoload.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "optionId:"+optionId+" optionName:"+optionName+" optionValue:"+optionValue+" autoload:"+autoload;
+    }
 }
