@@ -48,6 +48,7 @@
     <orderEntry type="library" name="mysql-connector-java-5.0.7-bin" level="project" />
     <orderEntry type="library" name="Spring-3.2.8.RELEASE" level="project" />
     <orderEntry type="library" name="Spring-3.2.8.RELEASE" level="project" />
+    <orderEntry type="library" name="log4j-slf4j-impl-2.0-rc1" level="project" />
   </component>
 </module>
 

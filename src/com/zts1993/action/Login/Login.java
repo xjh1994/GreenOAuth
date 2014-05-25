@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zts1993.bean.GreenOptions;
 import com.zts1993.bean.UserLogin;
+import com.zts1993.dao.GreenOptionsDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -28,25 +29,33 @@ public class Login extends ActionSupport {
 
 
     public String execute() throws Exception {
+
+
         ActionContext.getContext().getSession().put("isLogin", "1");
 
-
-        Configuration configuration = new Configuration().configure();
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
+//        Configuration configuration = new Configuration().configure();
+//
+//        SessionFactory sessionFactory = configuration.buildSessionFactory();
+//
+//        Session session = sessionFactory.openSession();
+//        Transaction transaction = session.beginTransaction();
+//
         GreenOptions greenOptions = new GreenOptions();
-        greenOptions.setOptionName("title");
-        greenOptions.setOptionValue("GreenOAUth");
+        greenOptions.setOptionName("author");
+        greenOptions.setOptionValue("zts1993");
         greenOptions.setAutoload("true");
+//
+//        session.save(greenOptions);
+//        transaction.commit();
+//        session.close();
 
-        session.save(greenOptions);
-        transaction.commit();
-        session.close();
+        GreenOptionsDAO greenOptionsDAO = new GreenOptionsDAO();
+        greenOptionsDAO.save(greenOptions);
 
 
         return "success";
+
+
     }
 
     public String loginPage() throws Exception {

@@ -13,6 +13,17 @@ public class GreenOptions {
         return optionId;
     }
 
+    public GreenOptions(long optionId, String optionName, String optionValue, String autoload) {
+        this.optionId = optionId;
+        this.optionName = optionName;
+        this.optionValue = optionValue;
+        this.autoload = autoload;
+    }
+
+    public GreenOptions() {
+
+    }
+
     public void setOptionId(long optionId) {
         this.optionId = optionId;
     }
@@ -67,6 +78,6 @@ public class GreenOptions {
 
     @Override
     public String toString() {
-        return "optionId:"+optionId+" optionName:"+optionName+" optionValue:"+optionValue+" autoload:"+autoload;
+        return "optionId:" + optionId + " optionName:" + optionName + " optionValue:" + optionValue + " autoload:" + autoload;
     }
 }
