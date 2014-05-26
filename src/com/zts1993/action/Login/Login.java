@@ -8,6 +8,8 @@ import com.zts1993.bean.UserLogin;
 import com.zts1993.dao.GreenOptionsDAO;
 import com.zts1993.dao.GreenUserDAO;
 import com.zts1993.util.MD5Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -18,6 +20,7 @@ import org.hibernate.cfg.Configuration;
  * Created by TianShuo on 14-5-20.
  */
 public class Login extends ActionSupport {
+    private static Logger log = LogManager.getLogger("Login");
 
 
     UserLogin userLogin;
@@ -57,20 +60,21 @@ public class Login extends ActionSupport {
 
 
         GreenUserDAO greenUserDAO = new GreenUserDAO();
-        GreenUser greenUser=new GreenUser();
+        GreenUser greenUser = new GreenUser();
         greenUser.setUserLogin(getUserLogin().getUsername());
-        greenUser.setUserPass(MD5Util.MD5(getUserLogin().getPassword()));
+        greenUser.setUserPass(getUserLogin().getPassword());
 
-        if(greenUserDAO.loginCheck(greenUser)){
-            System.out.println("Login Success");
+        if (greenUserDAO.loginCheck(greenUser)) {
+            log.debug("Login Success");
+            greenUser= (GreenUser) greenUserDAO.findByUserLogin(getUserLogin().getUsername()).get(0);
+            log.debug("greenUser:"+greenUser.toString());
+
+
             return "success";
-
-        }else{
-            System.out.println("Login Failed");
+        } else {
+            log.debug("Login Failed");
             return "failed";
-
         }
-
 
 
     }

@@ -38,14 +38,13 @@ public class GreenUserDAO extends BaseHibernateDAO {
 
 
     public boolean loginCheck(GreenUser transientInstance) {
-        log.debug("saving GreenUser instance");
+        log.debug("loginCheck");
         try {
             String queryString = "from GreenUser where userLogin =? and userPass=?";
             Query queryObject = getSession().createQuery(queryString);
             queryObject.setParameter(0, transientInstance.getUserLogin());
             queryObject.setParameter(1, transientInstance.getUserPass());
             List res_list = queryObject.list();
-
             if (res_list.size() == 0) return false;
             else return true;
         } catch (RuntimeException re) {

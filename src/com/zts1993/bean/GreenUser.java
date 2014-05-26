@@ -156,4 +156,22 @@ public class GreenUser {
         result = 31 * result + (userSession != null ? userSession.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "GreenUser{" +
+                "userId=" + userId +
+                ", userLogin='" + userLogin + '\'' +
+                ", userPass='" + userPass + '\'' +
+                ", userNicename='" + userNicename + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userUrl='" + userUrl + '\'' +
+                ", userRegistered=" + userRegistered +
+                ", userActivationKey='" + userActivationKey + '\'' +
+                ", userStatus=" + userStatus +
+                ", userIntro='" + userIntro + '\'' +
+                ", userLevel=" + userLevel +
+                ", userSession='" + userSession + '\'' +
+                '}';
+    }
 }
