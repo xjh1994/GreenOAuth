@@ -3,11 +3,12 @@ package com.zts1993.dao;
 import java.util.List;
 
 import com.zts1993.bean.GreenOptions;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -21,8 +22,8 @@ import org.slf4j.LoggerFactory;
  * @see com.zts1993.bean.GreenOptions
  */
 public class GreenOptionsDAO extends BaseHibernateDAO {
-    private static final Logger log = LoggerFactory
-            .getLogger(GreenOptionsDAO.class);
+    private static Logger log = LogManager.getLogger("GreenUserDAO");
+
     // property constants
     public static final String OPTION_NAME = "optionName";
     public static final String OPTION_VALUE = "optionValue";

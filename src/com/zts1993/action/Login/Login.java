@@ -3,8 +3,11 @@ package com.zts1993.action.Login;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zts1993.bean.GreenOptions;
+import com.zts1993.bean.GreenUser;
 import com.zts1993.bean.UserLogin;
 import com.zts1993.dao.GreenOptionsDAO;
+import com.zts1993.dao.GreenUserDAO;
+import com.zts1993.util.MD5Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -40,20 +43,34 @@ public class Login extends ActionSupport {
 //        Session session = sessionFactory.openSession();
 //        Transaction transaction = session.beginTransaction();
 //
-        GreenOptions greenOptions = new GreenOptions();
-        greenOptions.setOptionName("author");
-        greenOptions.setOptionValue("zts1993");
-        greenOptions.setAutoload("true");
+//        GreenOptions greenOptions = new GreenOptions();
+//        greenOptions.setOptionName("author");
+//        greenOptions.setOptionValue("zts1993");
+//        greenOptions.setAutoload("true");
 //
 //        session.save(greenOptions);
 //        transaction.commit();
 //        session.close();
 
-        GreenOptionsDAO greenOptionsDAO = new GreenOptionsDAO();
-        greenOptionsDAO.save(greenOptions);
+//        GreenOptionsDAO greenOptionsDAO = new GreenOptionsDAO();
+//        greenOptionsDAO.save(greenOptions);
 
 
-        return "success";
+        GreenUserDAO greenUserDAO = new GreenUserDAO();
+        GreenUser greenUser=new GreenUser();
+        greenUser.setUserLogin(getUserLogin().getUsername());
+        greenUser.setUserPass(MD5Util.MD5(getUserLogin().getPassword()));
+
+        if(greenUserDAO.loginCheck(greenUser)){
+            System.out.println("Login Success");
+            return "success";
+
+        }else{
+            System.out.println("Login Failed");
+            return "failed";
+
+        }
+
 
 
     }

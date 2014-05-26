@@ -12,7 +12,7 @@
           <element id="library" level="project" name="Hibernate 3.6.10-3.6.10" />
           <element id="library" level="project" name="mysql-connector-java-5.0.7-bin" />
           <element id="library" level="project" name="Spring-3.2.8.RELEASE" />
-          <element id="library" level="project" name="log4j-slf4j-impl-2.0-rc1" />
+          <element id="library" level="project" name="log4j" />
         </element>
       </element>
     </root>
