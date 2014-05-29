@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-/OpenSymphonyGroup//XWork Validator 1.0.2//EN"
+        "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+
+<validators>
+    <field name="userLogin.username">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>请输入用户名</message>
+        </field-validator>
+    </field>
+
+    <field name="userLogin.password">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>请输入密码</message>
+        </field-validator>
+        <field-validator type="regex">
+            <param name="regexExpression"><![CDATA[(\w{4,25})]]]></param>
+            <message>密码只能是数字或者字母，且长度在4到25之间</message>
+        </field-validator>
+    </field>
+</validators>

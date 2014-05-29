@@ -15,6 +15,15 @@ public class GreenUser {
     private Timestamp userRegistered;
     private String userActivationKey;
     private Integer userStatus;
+
+    public GreenUser(String userLogin, String userPass) {
+        this.userLogin = userLogin;
+        this.userPass = userPass;
+    }
+
+    public GreenUser() {
+    }
+
     private String userIntro;
     private short userLevel;
     private String userSession;

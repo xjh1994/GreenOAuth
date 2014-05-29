@@ -10,7 +10,7 @@
 
 
     <package name="index" namespace="/index" extends="struts-default">
-        <action name="index" class="com.zts1993.action.Index.Index" method="indexPage">
+        <action name="index" class="com.zts1993.action.Index.IndexAction" method="indexPage">
             <result name="success">/page/index/indexPage.jsp</result>
         </action>
 
@@ -22,12 +22,11 @@
         <global-results>
             <result name="sql">/page/error/sql.jsp</result>
             <result name="404">/page/error/404.jsp</result>
-
         </global-results>
         <global-exception-mappings>
             <exception-mapping exception="java.sql.SQLException" result="sql"></exception-mapping>
         </global-exception-mappings>
-        <action name="index" class="com.zts1993.action.Admin.Index" method="indexPage">
+        <action name="index" class="com.zts1993.action.Admin.IndexAction" method="indexPage">
             <result name="success">/page/admin/indexPage.jsp</result>
         </action>
 
@@ -36,11 +35,12 @@
 
     <package name="login" namespace="/login" extends="struts-default">
 
-        <action name="login" class="com.zts1993.action.Login.Login" method="loginPage">
+
+        <action name="login" class="com.zts1993.action.Login.LoginPageAction" >
             <result name="success">/page/login/loginPage.jsp</result>
         </action>
 
-        <action name="loginHandle" class="com.zts1993.action.Login.Login">
+        <action name="loginHandle" class="com.zts1993.action.Login.LoginAction">
             <!--<result name="success">/page/login/loginRes.jsp</result>-->
             <result name="success" type="redirectAction">
                 <param name="namespace">/admin</param>
@@ -48,11 +48,16 @@
 
             </result>
 
-            <result name="failed">/page/login/loginPage.jsp</result>
+            <result name="input">/page/login/loginPage.jsp</result>
+
+
 
         </action>
 
 
+
     </package>
+
+
 
 </struts>

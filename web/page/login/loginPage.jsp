@@ -37,6 +37,7 @@
         <div class="body bg-gray">
             <div class="form-group">
                 <s:textfield name="userLogin.username" cssClass="form-control" placeholder="Username"></s:textfield>
+                   <s:fielderror/>
             </div>
             <div class="form-group">
                 <s:textfield name="userLogin.password" cssClass="form-control" placeholder="Password"></s:textfield>
@@ -50,7 +51,7 @@
 
                 <%--<p><a href="#">I forgot my password</a></p>--%>
 
-                <%--<a href="register.html" class="text-center">Register a new membership</a>--%>
+                <%--<a href="register.html" class="text-center">RegisterAction a new membership</a>--%>
         </div>
     </s:form>
 
