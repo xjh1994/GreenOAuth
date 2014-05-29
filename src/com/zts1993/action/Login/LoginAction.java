@@ -44,6 +44,7 @@ public class LoginAction extends ActionSupport {
 
             return "success";
         } else {
+            this.addFieldError("userLogin.username","用户名或者密码错误");
             log.debug("LoginAction Failed");
             return "input";
         }

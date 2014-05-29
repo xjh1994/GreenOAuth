@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE validators PUBLIC "-/OpenSymphonyGroup//XWork Validator 1.0.2//EN"
-        "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
 
 
 <validators>
@@ -17,7 +18,7 @@
             <message>请输入密码</message>
         </field-validator>
         <field-validator type="regex">
-            <param name="regexExpression"><![CDATA[(\w{4,25})]]]></param>
+            <param name="regexExpression"><![CDATA[(\w{4,25})]]></param>
             <message>密码只能是数字或者字母，且长度在4到25之间</message>
         </field-validator>
     </field>

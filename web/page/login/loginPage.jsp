@@ -27,6 +27,14 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+    <style>
+        .errorMessage {
+            list-style-type: none;
+            padding: 5px 0px 0px 15px;
+            color: #c61f1b;
+        }
+    </style>
 </head>
 <body class="bg-black">
 
@@ -37,10 +45,12 @@
         <div class="body bg-gray">
             <div class="form-group">
                 <s:textfield name="userLogin.username" cssClass="form-control" placeholder="Username"></s:textfield>
-                   <s:fielderror/>
+                <s:fielderror fieldName="userLogin.username"/>
             </div>
             <div class="form-group">
-                <s:textfield name="userLogin.password" cssClass="form-control" placeholder="Password"></s:textfield>
+                <s:password name="userLogin.password" cssClass="form-control" placeholder="Password"></s:password>
+                <s:fielderror fieldName="userLogin.password"/>
+
             </div>
             <div class="form-group">
                 <input type="checkbox" name="remember_me"/> Remember me
