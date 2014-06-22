@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.zts1993.bean.GreenUser" table="green_user" schema="" catalog="greenoathu">
+    <class name="com.zts1993.Bean.GreenUser" table="green_user" schema="" catalog="greenoathu">
         <id name="userId" column="user_id"/>
         <property name="userLogin" column="user_login"/>
         <property name="userPass" column="user_pass"/>

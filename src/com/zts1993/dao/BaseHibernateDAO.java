@@ -1,7 +1,7 @@
-package com.zts1993.dao;
+package com.zts1993.Dao;
 
-import com.zts1993.db.HibernateSessionFactory;
-import com.zts1993.db.IBaseHibernateDAO;
+import com.zts1993.Db.HibernateSessionFactory;
+import com.zts1993.Db.IBaseHibernateDAO;
 import org.hibernate.Session;
 
 

@@ -107,7 +107,7 @@
     },
 
     initHtml: function(toolbar) {
-      var changeViewSelector = 'a[data-wysihtml5-action="change_view"]';
+      var changeViewSelector = 'a[data-wysihtml5-Action="change_view"]';
       toolbar.find(changeViewSelector).click(function(e) {
         toolbar.find('a.btn').not(changeViewSelector).toggleClass('disabled');
       });

@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>GreenOAuth | Dashboard</title>
+    <title>GreenOAuth | Application</title>
 
     <s:include value="header.jsp"></s:include>
 </head>
@@ -26,7 +26,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">here</li>
+                <li class="active">Application</li>
             </ol>
         </section>
 

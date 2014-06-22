@@ -69,7 +69,7 @@
 
                 return { "mask": repeatedMask, "repeat": repeat, "greedy": greedy };
             }
-            //test definition => {fn: RegExp/function, cardinality: int, optionality: bool, newBlockMarker: bool, offset: int, casing: null/upper/lower, def: definitionSymbol}
+            //Test definition => {fn: RegExp/function, cardinality: int, optionality: bool, newBlockMarker: bool, offset: int, casing: null/upper/lower, def: definitionSymbol}
             function getTestingChain(mask) {
                 if (opts.numericInput) {
                     mask = mask.split('').reverse().join('');
@@ -923,7 +923,7 @@
 
                 //backspace, delete, and escape get special treatment
                 if (k == opts.keyCode.BACKSPACE || k == opts.keyCode.DELETE || (iphone && k == 127) || e.ctrlKey && k == 88) { //backspace/delete
-                    e.preventDefault(); //stop default action but allow propagation
+                    e.preventDefault(); //stop default Action but allow propagation
                     if (k == 88) valueOnFocus = getActiveBuffer().join('');
                     HandleRemove(input, k, pos);
                     determineActiveMasksetIndex();
@@ -1391,7 +1391,7 @@
                 }
             }
 
-            //action object
+            //Action object
             if (actionObj != undefined) {
                 switch (actionObj["action"]) {
                     case "isComplete":

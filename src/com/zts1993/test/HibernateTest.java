@@ -1,7 +1,7 @@
-package com.zts1993.test;
+package com.zts1993.Test;
 
-import com.zts1993.bean.GreenOptions;
-import com.zts1993.dao.GreenOptionsDAO;
+import com.zts1993.Bean.GreenOptions;
+import com.zts1993.Dao.GreenOptionsDAO;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;

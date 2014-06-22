@@ -1,4 +1,4 @@
-package com.zts1993.db;
+package com.zts1993.Db;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

@@ -1427,7 +1427,7 @@ $.ui.position = {
 	}
 };
 
-// fraction support test
+// fraction support Test
 (function () {
 	var testElement, testElementParent, testElementStyle, offsetLeft, i,
 		body = document.getElementsByTagName( "body" )[ 0 ],
@@ -4347,7 +4347,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 
 			// cannot intersect with itself
 			// no useless actions that have been done before
-			// no action if the item moved is the parent of the item checked
+			// no Action if the item moved is the parent of the item checked
 			if (itemElement !== this.currentItem[0] &&
 				this.placeholder[intersection === 1 ? "next" : "prev"]()[0] !== itemElement &&
 				!$.contains(this.placeholder[0], itemElement) &&
@@ -6473,7 +6473,7 @@ $.effects = {
 
 	var stepHooks = "backgroundColor borderBottomColor borderLeftColor borderRightColor borderTopColor color columnRuleColor outlineColor textDecorationColor textEmphasisColor",
 
-	// plusequals test for += 100 -= 100
+	// plusequals Test for += 100 -= 100
 	rplusequals = /^([\-+])=\s*(\d+\.?\d*)/,
 	// a set of RE's that can match strings and generate color tuples.
 	stringParsers = [{

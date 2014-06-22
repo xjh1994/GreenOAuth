@@ -850,7 +850,7 @@
 			{
 				/* If there is a . in the source string then the data source is in a 
 				 * nested object so we loop over the data for each level to get the next
-				 * level down. On each loop we test for undefined, and if found immediately
+				 * level down. On each loop we Test for undefined, and if found immediately
 				 * return. This allows entire objects to be missing and sDefaultContent to
 				 * be used if defined, rather than throwing an error
 				 */
@@ -2896,7 +2896,7 @@
 		/**
 		 * Alter the display settings to change the page
 		 *  @param {object} oSettings dataTables settings object
-		 *  @param {string|int} mAction Paging action to take: "first", "previous", "next" or "last"
+		 *  @param {string|int} mAction Paging Action to take: "first", "previous", "next" or "last"
 		 *    or page number to jump to (integer)
 		 *  @returns {bool} true page has changed, false - no change (no effect) eg 'first' on page 1
 		 *  @memberof DataTable#oApi
@@ -2958,7 +2958,7 @@
 			}
 			else
 			{
-				_fnLog( oSettings, 0, "Unknown paging action: "+mAction );
+				_fnLog( oSettings, 0, "Unknown paging Action: "+mAction );
 			}
 			$(oSettings.oInstance).trigger('page', oSettings);
 			
@@ -4021,8 +4021,8 @@
 				 *  		return iTest;
 				 *  	return oSort['numeric-asc']( aiOrig[a], aiOrig[b] );
 				 *  }
-				 * Basically we have a test for each sorting column, if the data in that column is equal,
-				 * test the next column. If all columns match, then we use a numeric sort on the row 
+				 * Basically we have a Test for each sorting column, if the data in that column is equal,
+				 * Test the next column. If all columns match, then we use a numeric sort on the row
 				 * positions in the original data array to provide a stable sort.
 				 */
 				oSettings.aiDisplayMaster.sort( function ( a, b ) {
@@ -4786,7 +4786,7 @@
 		 * Bind an event handers to allow a click or return key to activate the callback.
 		 * This is good for accessibility since a return on the keyboard will have the
 		 * same effect as a click, if the element has focus.
-		 *  @param {element} n Element to bind the action to
+		 *  @param {element} n Element to bind the Action to
 		 *  @param {object} oData Data object to pass to the triggered function
 		 *  @param {function} fn Callback function for when the event is triggered
 		 *  @memberof DataTable#oApi
@@ -4938,7 +4938,7 @@
 		
 
 		/**
-		 * Perform a jQuery selector action on the table's TR elements (from the tbody) and
+		 * Perform a jQuery selector Action on the table's TR elements (from the tbody) and
 		 * return the resulting jQuery object.
 		 *  @param {string|node|jQuery} sSelector jQuery selector or node collection to act on
 		 *  @param {object} [oOpts] Optional parameters for modifying the rows to be included
@@ -5413,7 +5413,7 @@
 		
 			bRemove = (bRemove===undefined) ? false : bRemove;
 			
-			/* Flag to note that the table is currently being destroyed - no action should be taken */
+			/* Flag to note that the table is currently being destroyed - no Action should be taken */
 			oSettings.bDestroying = true;
 			
 			/* Fire off the destroy callbacks for plug-ins etc */
@@ -5575,7 +5575,7 @@
 		 *      var oTable = $('#example').dataTable();
 		 *      
 		 *      // Sometime later - filter...
-		 *      oTable.fnFilter( 'test string' );
+		 *      oTable.fnFilter( 'Test string' );
 		 *    } );
 		 */
 		this.fnFilter = function( sInput, iColumn, bRegex, bSmart, bShowGlobal, bCaseInsensitive )
@@ -5910,7 +5910,7 @@
 		 * Change the pagination - provides the internal logic for pagination in a simple API 
 		 * function. With this function you can have a DataTables table go to the next, 
 		 * previous, first or last pages.
-		 *  @param {string|int} mAction Paging action to take: "first", "previous", "next" or "last"
+		 *  @param {string|int} mAction Paging Action to take: "first", "previous", "next" or "last"
 		 *    or page number to jump to (integer), note that page 0 is the first page.
 		 *  @param {bool} [bRedraw=true] Redraw the table or not
 		 *  @dtopt API
@@ -8136,7 +8136,7 @@
 		/**
 		 * Enable or disable the table information display. This shows information 
 		 * about the data that is currently visible on the page, including information
-		 * about filtered data if that action is being performed.
+		 * about filtered data if that Action is being performed.
 		 *  @type boolean
 		 *  @default true
 		 *  @dtopt Features
@@ -8663,7 +8663,7 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "fnPreDrawCallback": function( oSettings ) {
-		 *          if ( $('#test').val() == 1 ) {
+		 *          if ( $('#Test').val() == 1 ) {
 		 *            return false;
 		 *          }
 		 *        }
@@ -9372,7 +9372,7 @@
 		
 		
 			/**
-			 * Detail the action that will be taken when the drop down menu for the
+			 * Detail the Action that will be taken when the drop down menu for the
 			 * pagination length option is changed. The '_MENU_' variable is replaced
 			 * with a default select list of 10, 25, 50 and 100, and can be replaced
 			 * with a custom select box if required.
@@ -9433,7 +9433,7 @@
 		
 		
 			/**
-			 * Text which is displayed when the table is processing a user action
+			 * Text which is displayed when the table is processing a user Action
 			 * (usually a sort command or similar).
 			 *  @type string
 			 *  @default Processing...
@@ -9490,7 +9490,7 @@
 			 * It must store the URL of the language file, which is in a JSON format,
 			 * and the object has the same properties as the oLanguage object in the
 			 * initialiser object (i.e. the above parameters). Please refer to one of
-			 * the example language files to see how this works in action.
+			 * the example language files to see how this works in Action.
 			 *  @type string
 			 *  @default <i>Empty string - i.e. disabled</i>
 			 *  @dtopt Language
@@ -10073,7 +10073,7 @@
 		 *     <li>null - the sDefaultContent option will be used for the cell (null
 		 *       by default, so you will need to specify the default content you want -
 		 *       typically an empty string). This can be useful on generated columns such 
-		 *       as edit / delete action columns.</li>
+		 *       as edit / delete Action columns.</li>
 		 *     <li>function - the function given will be executed whenever DataTables 
 		 *       needs to set or get the data for a cell in the column. The function 
 		 *       takes three parameters:

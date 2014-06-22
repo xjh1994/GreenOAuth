@@ -10,7 +10,7 @@
 
 
     <package name="index" namespace="/index" extends="struts-default">
-        <action name="index" class="com.zts1993.action.Index.IndexAction" method="indexPage">
+        <action name="index" class="com.zts1993.Action.Index.IndexAction" method="indexPage">
             <result name="success">/page/index/indexPage.jsp</result>
         </action>
 
@@ -26,8 +26,13 @@
         <global-exception-mappings>
             <exception-mapping exception="java.sql.SQLException" result="sql"></exception-mapping>
         </global-exception-mappings>
-        <action name="index" class="com.zts1993.action.Admin.IndexAction" method="indexPage">
+        <action name="index" class="com.zts1993.Action.Admin.IndexAction" method="indexPage">
             <result name="success">/page/admin/indexPage.jsp</result>
+        </action>
+
+
+        <action name="application" class="com.zts1993.Action.Admin.IndexAction" method="applicationPage">
+            <result name="success">/page/admin/applicationPage.jsp</result>
         </action>
 
 
@@ -35,12 +40,11 @@
 
     <package name="login" namespace="/login" extends="struts-default">
 
-
-        <action name="login" class="com.zts1993.action.Login.LoginPageAction" >
+        <action name="login" class="com.zts1993.Action.Login.LoginPageAction">
             <result name="success">/page/login/loginPage.jsp</result>
         </action>
 
-        <action name="loginHandle" class="com.zts1993.action.Login.LoginAction">
+        <action name="loginHandle" class="com.zts1993.Action.Login.LoginAction">
             <!--<result name="success">/page/login/loginRes.jsp</result>-->
             <result name="success" type="redirectAction">
                 <param name="namespace">/admin</param>
@@ -50,14 +54,55 @@
 
             <result name="input">/page/login/loginPage.jsp</result>
 
+        </action>
+    </package>
+
+    <package name="client" namespace="/oauth2" extends="struts-default">
+
+        <action name="login" class="com.zts1993.Action.Client.LoginPageAction">
+            <result name="success">/page/client/loginPage.jsp</result>
+        </action>
+
+        <action name="loginHanlde" class="com.zts1993.Action.Client.LoginAction">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/oauth2</param>
+                <param name="actionName">authorize</param>
+            </result>
+
+            <result name="exception">/page/client/exceptionPage.jsp</result>
+
+            <result name="input">/page/client/loginPage.jsp</result>
+
+            
+        </action>
 
 
+        <action name="authorize" class="com.zts1993.Action.Client.AuthorizePageAction">
+            <result name="success">/page/client/authorizePage.jsp</result>
         </action>
 
 
 
-    </package>
 
+        <action name="access_token">
+
+        </action>
+
+
+        <action name="get_token_info">
+
+        </action>
+
+
+        <action name="revokeoauth2">
+
+        </action>
+
+        <action name="get_oauth2_token">
+
+        </action>
+
+    </package>
 
 
 </struts>

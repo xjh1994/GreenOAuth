@@ -1,10 +1,10 @@
-package com.zts1993.action.Login;
+package com.zts1993.Action.Login;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.zts1993.bean.GreenUser;
-import com.zts1993.bean.UserLogin;
-import com.zts1993.dao.GreenUserDAO;
+import com.zts1993.Bean.GreenUser;
+import com.zts1993.Bean.UserLogin;
+import com.zts1993.Dao.GreenUserDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,6 +1,5 @@
-package com.zts1993.action.Admin;
+package com.zts1993.Action.Admin;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -10,13 +9,16 @@ public class IndexAction extends ActionSupport {
 
     public String indexPage() throws Exception {
 
+        return "success";
 
+    }
+
+    public String applicationPage() throws Exception {
 
 
         return "success";
 
     }
-
 
 
     public String execute() throws Exception {

@@ -1,9 +1,8 @@
-package com.zts1993.dao;
+package com.zts1993.Dao;
 
-import java.sql.Timestamp;
 import java.util.List;
 
-import com.zts1993.bean.GreenUser;
+import com.zts1993.Bean.GreenUser;
 
 
 import org.apache.logging.log4j.LogManager;
@@ -19,7 +18,7 @@ import org.hibernate.criterion.Example;
  * Each of these methods provides additional information for how to configure it for the desired type of transaction control.
  *
  * @author MyEclipse Persistence Tools
- * @see com.zts1993.bean.GreenUser
+ * @see com.zts1993.Bean.GreenUser
  */
 public class GreenUserDAO extends BaseHibernateDAO {
     private static Logger log = LogManager.getLogger("GreenUserDAO");

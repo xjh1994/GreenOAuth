@@ -1,4 +1,4 @@
-package com.zts1993.bean;
+package com.zts1993.Bean;
 
 import java.sql.Timestamp;
 

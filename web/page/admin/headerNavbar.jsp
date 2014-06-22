@@ -4,8 +4,7 @@
 <!-- header logo: style can be found in header.less -->
 <header class="header">
 <a href="<s:action namespace="/admin" name="index"></s:action> " class="logo">
-<!-- Add the class icon to your logo image or logo icon to add the margining -->
-AdminLTE
+    GreenOAuth
 </a>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top" role="navigation">
@@ -16,6 +15,7 @@ AdminLTE
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
 </a>
+
 <div class="navbar-right">
 <ul class="nav navbar-nav">
 <!-- Messages: style can be found in dropdown.less-->
@@ -40,7 +40,8 @@ AdminLTE
                         </h4>
                         <p>Why not buy a new awesome theme?</p>
                     </a>
-                </li><!-- end message -->
+                </li>
+                <!-- end message -->
                 <li>
                     <a href="#">
                         <div class="pull-left">
@@ -112,7 +113,8 @@ AdminLTE
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-warning danger"></i> Very long description here that may not fit into the page and may cause design problems
+                        <i class="fa fa-warning danger"></i> Very long description here that may not fit into the page
+                        and may cause design problems
                     </a>
                 </li>
                 <li>
@@ -154,12 +156,14 @@ AdminLTE
                             <small class="pull-right">20%</small>
                         </h3>
                         <div class="progress xs">
-                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">20% Complete</span>
                             </div>
                         </div>
                     </a>
-                </li><!-- end task item -->
+                </li>
+                <!-- end task item -->
                 <li><!-- Task item -->
                     <a href="#">
                         <h3>
@@ -167,12 +171,14 @@ AdminLTE
                             <small class="pull-right">40%</small>
                         </h3>
                         <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
+                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">40% Complete</span>
                             </div>
                         </div>
                     </a>
-                </li><!-- end task item -->
+                </li>
+                <!-- end task item -->
                 <li><!-- Task item -->
                     <a href="#">
                         <h3>
@@ -180,12 +186,14 @@ AdminLTE
                             <small class="pull-right">60%</small>
                         </h3>
                         <div class="progress xs">
-                            <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
+                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
                     </a>
-                </li><!-- end task item -->
+                </li>
+                <!-- end task item -->
                 <li><!-- Task item -->
                     <a href="#">
                         <h3>
@@ -193,12 +201,14 @@ AdminLTE
                             <small class="pull-right">80%</small>
                         </h3>
                         <div class="progress xs">
-                            <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
+                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">80% Complete</span>
                             </div>
                         </div>
                     </a>
-                </li><!-- end task item -->
+                </li>
+                <!-- end task item -->
             </ul>
         </li>
         <li class="footer">
@@ -215,7 +225,8 @@ AdminLTE
     <ul class="dropdown-menu">
         <!-- User image -->
         <li class="user-header bg-light-blue">
-            <img src="/assets/img/avatar3.png" class="img-circle" alt="User Image" />
+            <img src="/assets/img/avatar3.png" class="img-circle" alt="User Image"/>
+
             <p>
                 Jane Doe - Web Developer
                 <small>Member since Nov. 2012</small>
