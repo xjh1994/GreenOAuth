@@ -63,6 +63,11 @@
             <result name="success">/page/client/loginPage.jsp</result>
         </action>
 
+        <action name="accessToken" class="com.zts1993.Action.Client.AccessTokenAction">
+
+            <result name="success">/page/client/accessToken.jsp</result>
+        </action>
+
         <action name="loginHanlde" class="com.zts1993.Action.Client.LoginAction">
             <result name="success" type="redirectAction">
                 <param name="namespace">/oauth2</param>
