@@ -13,6 +13,18 @@
     <title></title>
 </head>
 <body>
-authorizePage
+
+<%--${client_id}--%>
+<%--${redirect_uri}--%>
+
+<s:form action="authorizeHandle" method="post" id="loginForm">
+
+    <s:hidden name="client_id" >${client_id}</s:hidden>
+    <br/>
+    <s:hidden name="redirect_uri"  >${redirect_uri}</s:hidden>
+    <s:submit value="click here to authorize"/>
+</s:form>
+
+
 </body>
 </html>

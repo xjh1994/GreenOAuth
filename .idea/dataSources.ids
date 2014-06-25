@@ -10,13 +10,13 @@
     <schema name="" catalog="ajax"/>
     <schema name="" catalog="book"/>
     <schema name="" catalog="bookshare"/>
-    <schema name="" catalog="django"/>
+    <schema name="" catalog="disk"/>
     <schema name="" catalog="evaluation"/>
     <schema name="" catalog="green"/>
     <schema name="" catalog="green-beta"/>
-    <schema name="" catalog="green00"/>
     <schema name="" catalog="greenapi"/>
     <schema name="" catalog="greenbbs"/>
+    <schema name="" catalog="greencms-sae"/>
     <schema name="" catalog="greenoathu"/>
     <schema name="" catalog="greenstudio"/>
     <schema name="" catalog="hotel"/>
@@ -34,6 +34,7 @@
     <schema name="" catalog="wordpress"/>
     <schema name="" catalog="xiaomi"/>
     <schema name="" catalog="xsc"/>
+    <schema name="" catalog="zts1993"/>
     <schema name="" catalog="zzb"/>
     <table name="access" schema="" catalog="2011" type="TABLE">
       <column name="role_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" def="MQ=="/>
@@ -377,20 +378,6 @@
       <primary-key name="PRIMARY" columns="unique_id"/>
       <index name="unique_id" unique="true" columns="unique_id"/>
     </table>
-    <table name="user" schema="" catalog="book" type="TABLE">
-      <column name="id" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
-      <column name="username" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
-      <column name="password" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
-    </table>
-    <table name="z_user" schema="" catalog="book" type="TABLE">
-      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="username" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="password" sqlType="VARCHAR" length="250" precision="0" nullable="false" jdbcType="12"/>
-      <column name="email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
-      <column name="hash" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <index name="username" unique="true" columns="username"/>
-    </table>
     <table name="admin" schema="" catalog="bookshare" type="TABLE">
       <column name="uid" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="username" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
@@ -584,108 +571,34 @@
       <column name="PicUrl" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="log_id"/>
     </table>
-    <table name="auth_group" schema="" catalog="django" type="TABLE">
+    <table name="t_directories" schema="" catalog="disk" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="80" precision="0" nullable="false" jdbcType="12"/>
+      <column name="user" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="path" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="parent_path" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="dir" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="create_time" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="group_id_refs_id_f4b32aac" table="auth_group_permissions" schema="" catalog="django" columns="group_id"/>
-      <exported-key name="group_id_refs_id_274b862c" table="auth_user_groups" schema="" catalog="django" columns="group_id"/>
-      <index name="name" unique="true" columns="name"/>
+      <index name="user" unique="true" columns="user,path"/>
     </table>
-    <table name="auth_group_permissions" schema="" catalog="django" type="TABLE">
+    <table name="t_files" schema="" catalog="disk" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="group_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="permission_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="user" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="file" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="path" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="size" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="upload_time" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="group_id_refs_id_f4b32aac" columns="group_id" ref-table="auth_group" ref-schema="" ref-catalog="django" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="permission_id_refs_id_6ba0f519" columns="permission_id" ref-table="auth_permission" ref-schema="" ref-catalog="django" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="group_id" unique="true" columns="permission_id"/>
-      <index name="auth_group_permissions_5f412f9a" unique="false" columns="group_id"/>
-      <index name="auth_group_permissions_83d7f98b" unique="false" columns="permission_id"/>
+      <index name="file" unique="true" columns="file,path"/>
     </table>
-    <table name="auth_permission" schema="" catalog="django" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="content_type_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="codename" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="content_type_id_refs_id_d043b34a" columns="content_type_id" ref-table="django_content_type" ref-schema="" ref-catalog="django" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="permission_id_refs_id_6ba0f519" table="auth_group_permissions" schema="" catalog="django" columns="permission_id"/>
-      <exported-key name="permission_id_refs_id_35d9ac25" table="auth_user_user_permissions" schema="" catalog="django" columns="permission_id"/>
-      <index name="content_type_id" unique="true" columns="codename"/>
-      <index name="auth_permission_37ef4eb4" unique="false" columns="content_type_id"/>
-    </table>
-    <table name="auth_user" schema="" catalog="django" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="password" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12"/>
-      <column name="last_login" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
-      <column name="is_superuser" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6"/>
-      <column name="username" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="first_name" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="last_name" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="email" sqlType="VARCHAR" length="75" precision="0" nullable="false" jdbcType="12"/>
-      <column name="is_staff" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6"/>
-      <column name="is_active" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6"/>
-      <column name="date_joined" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="user_id_refs_id_40c41112" table="auth_user_groups" schema="" catalog="django" columns="user_id"/>
-      <exported-key name="user_id_refs_id_4dc23c39" table="auth_user_user_permissions" schema="" catalog="django" columns="user_id"/>
-      <exported-key name="user_id_refs_id_c0d12874" table="django_admin_log" schema="" catalog="django" columns="user_id"/>
-      <index name="username" unique="true" columns="username"/>
-    </table>
-    <table name="auth_user_groups" schema="" catalog="django" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="user_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="group_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="group_id_refs_id_274b862c" columns="group_id" ref-table="auth_group" ref-schema="" ref-catalog="django" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="user_id_refs_id_40c41112" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="django" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="user_id" unique="true" columns="group_id"/>
-      <index name="auth_user_groups_5f412f9a" unique="false" columns="group_id"/>
-      <index name="auth_user_groups_6340c63c" unique="false" columns="user_id"/>
-    </table>
-    <table name="auth_user_user_permissions" schema="" catalog="django" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="user_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="permission_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="permission_id_refs_id_35d9ac25" columns="permission_id" ref-table="auth_permission" ref-schema="" ref-catalog="django" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="user_id_refs_id_4dc23c39" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="django" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="user_id" unique="true" columns="permission_id"/>
-      <index name="auth_user_user_permissions_6340c63c" unique="false" columns="user_id"/>
-      <index name="auth_user_user_permissions_83d7f98b" unique="false" columns="permission_id"/>
-    </table>
-    <table name="django_admin_log" schema="" catalog="django" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="action_time" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
-      <column name="user_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="content_type_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="object_id" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1"/>
-      <column name="object_repr" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12"/>
-      <column name="action_flag" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5"/>
-      <column name="change_message" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="content_type_id_refs_id_93d2d1f8" columns="content_type_id" ref-table="django_content_type" ref-schema="" ref-catalog="django" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="user_id_refs_id_c0d12874" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="django" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="django_admin_log_37ef4eb4" unique="false" columns="content_type_id"/>
-      <index name="django_admin_log_6340c63c" unique="false" columns="user_id"/>
-    </table>
-    <table name="django_content_type" schema="" catalog="django" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
-      <column name="app_label" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
-      <column name="model" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="content_type_id_refs_id_d043b34a" table="auth_permission" schema="" catalog="django" columns="content_type_id"/>
-      <exported-key name="content_type_id_refs_id_93d2d1f8" table="django_admin_log" schema="" catalog="django" columns="content_type_id"/>
-      <index name="app_label" unique="true" columns="app_label,model"/>
-    </table>
-    <table name="django_session" schema="" catalog="django" type="TABLE">
-      <column name="session_key" sqlType="VARCHAR" length="40" precision="0" nullable="false" jdbcType="12"/>
-      <column name="session_data" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
-      <column name="expire_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="session_key"/>
-      <index name="django_session_b7b81f0c" unique="false" columns="expire_date"/>
+    <table name="t_users" schema="" catalog="disk" type="TABLE">
+      <column name="user" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="password_md5" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="xm" sqlType="VARCHAR" length="10" precision="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="phone" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="qq" sqlType="VARCHAR" length="12" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="user"/>
     </table>
     <table name="cjb14051101" schema="" catalog="evaluation" type="TABLE">
       <column name="XN" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
@@ -1185,16 +1098,6 @@
       <column name="email" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
       <column name="comment" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J1dhaXRpbmcn"/>
       <primary-key name="PRIMARY" columns="fid"/>
-    </table>
-    <table name="green_form" schema="" catalog="green" type="TABLE">
-      <column name="fa_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="class" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="tel" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
-      <column name="direction" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="message" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
-      <primary-key name="PRIMARY" columns="fa_id"/>
     </table>
     <table name="green_guestbook" schema="" catalog="green" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -1764,317 +1667,6 @@
       <column name="subscribe_time" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="weixin_userid"/>
     </table>
-    <table name="green_access" schema="" catalog="green00" type="TABLE">
-      <column name="role_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" def="MQ=="/>
-      <column name="node_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5"/>
-      <column name="level" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6"/>
-      <column name="pid" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
-      <column name="module" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <index name="groupId" unique="false" columns="role_id"/>
-      <index name="nodeId" unique="false" columns="node_id"/>
-    </table>
-    <table name="green_addons" schema="" catalog="green00" type="TABLE">
-      <column name="id" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" remarks="5Li76ZSu" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="40" precision="0" nullable="false" jdbcType="12" remarks="5o+S5Lu25ZCN5oiW5qCH6K+G"/>
-      <column name="title" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12" def="Jyc=" remarks="5Lit5paH5ZCN"/>
-      <column name="description" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="5o+S5Lu25o+P6L+w"/>
-      <column name="status" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ==" remarks="54q25oCB"/>
-      <column name="config" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="6YWN572u"/>
-      <column name="author" sqlType="VARCHAR" length="40" precision="0" nullable="true" jdbcType="12" def="Jyc=" remarks="5L2c6ICF"/>
-      <column name="version" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="Jyc=" remarks="54mI5pys5Y+3"/>
-      <column name="create_time" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" remarks="5a6J6KOF5pe26Ze0"/>
-      <column name="has_adminlist" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6" def="MA==" remarks="5piv5ZCm5pyJ5ZCO5Y+w5YiX6KGo"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="green_cats" schema="" catalog="green00" type="TABLE">
-      <column name="cat_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="cat_father" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <column name="cat_slug" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="cat_name" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="cat_order" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="cat_id"/>
-      <index name="slug" unique="true" columns="cat_slug"/>
-      <index name="name" unique="false" columns="cat_name"/>
-    </table>
-    <table name="green_comments" schema="" catalog="green00" type="TABLE">
-      <column name="comment_ID" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="comment_post_ID" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <column name="comment_author" sqlType="TINYTEXT" length="255" precision="0" nullable="false" jdbcType="12"/>
-      <column name="comment_author_email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="comment_author_url" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="comment_author_IP" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="comment_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <column name="comment_content" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
-      <column name="comment_approved" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12" def="JzEn"/>
-      <column name="comment_parent" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <primary-key name="PRIMARY" columns="comment_ID"/>
-      <index name="comment_approved_date_gmt" unique="false" columns="comment_approved"/>
-      <index name="comment_parent" unique="false" columns="comment_parent"/>
-      <index name="comment_post_ID" unique="false" columns="comment_post_ID"/>
-    </table>
-    <table name="green_feedback" schema="" catalog="green00" type="TABLE">
-      <column name="fid" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J2Fub255bW91cyc="/>
-      <column name="email" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
-      <column name="comment" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J1dhaXRpbmcn"/>
-      <primary-key name="PRIMARY" columns="fid"/>
-    </table>
-    <table name="green_form" schema="" catalog="green00" type="TABLE">
-      <column name="fa_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="class" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="tel" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
-      <column name="direction" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="message" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
-      <primary-key name="PRIMARY" columns="fa_id"/>
-    </table>
-    <table name="green_hooks" schema="" catalog="green00" type="TABLE">
-      <column name="id" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" remarks="5Li76ZSu" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="40" precision="0" nullable="false" jdbcType="12" def="Jyc=" remarks="6ZKp5a2Q5ZCN56ew"/>
-      <column name="description" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1" remarks="5o+P6L+w"/>
-      <column name="type" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ==" remarks="57G75Z6L"/>
-      <column name="update_time" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" remarks="5pu05paw5pe26Ze0"/>
-      <column name="addons" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="Jyc=" remarks="6ZKp5a2Q5oyC6L2955qE5o+S5Lu2ICfvvIwn5YiG5Ymy"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <index name="搜索索引" unique="true" columns="name"/>
-    </table>
-    <table name="green_kv" schema="" catalog="green00" type="TABLE">
-      <column name="kv_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="kv_key" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="kv_value" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="kv_id"/>
-    </table>
-    <table name="green_links" schema="" catalog="green00" type="TABLE">
-      <column name="link_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="link_sort" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5" def="MA=="/>
-      <column name="link_url" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
-      <column name="link_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
-      <column name="link_tag" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
-      <column name="link_description" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
-      <column name="link_visible" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6" def="MQ=="/>
-      <column name="link_img" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="link_id"/>
-      <index name="link_visible" unique="false" columns="link_visible"/>
-    </table>
-    <table name="green_log" schema="" catalog="green00" type="TABLE">
-      <column name="log_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <primary-key name="PRIMARY" columns="log_id"/>
-    </table>
-    <table name="green_login_log" schema="" catalog="green00" type="TABLE">
-      <column name="login_log_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="log_user_id" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="log_user_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="log_password" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="log_geo" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="log_time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
-      <column name="log_ip" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="log_status" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
-      <primary-key name="PRIMARY" columns="login_log_id"/>
-    </table>
-    <table name="green_menu" schema="" catalog="green00" type="TABLE">
-      <column name="menu_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="menu_pid" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <column name="menu_sort" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="OTk="/>
-      <column name="menu_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="menu_action" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J19zZWxmJw=="/>
-      <column name="menu_function" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="menu_position" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J2hlYWQn"/>
-      <column name="menu_url" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="menu_id"/>
-    </table>
-    <table name="green_mysql" schema="" catalog="green00" type="TABLE">
-      <column name="mysql_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <primary-key name="PRIMARY" columns="mysql_id"/>
-    </table>
-    <table name="green_node" schema="" catalog="green00" type="TABLE">
-      <column name="id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
-      <column name="title" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="status" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6" def="MA=="/>
-      <column name="remark" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="sort" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="true" jdbcType="5"/>
-      <column name="pid" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5"/>
-      <column name="level" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <index name="level" unique="false" columns="level"/>
-      <index name="name" unique="false" columns="name"/>
-      <index name="pid" unique="false" columns="pid"/>
-      <index name="status" unique="false" columns="status"/>
-    </table>
-    <table name="green_options" schema="" catalog="green00" type="TABLE">
-      <column name="option_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="option_name" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="option_value" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
-      <column name="autoload" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12" def="J3llcyc="/>
-      <primary-key name="PRIMARY" columns="option_id"/>
-      <index name="option_name" unique="true" columns="option_name"/>
-    </table>
-    <table name="green_plugin" schema="" catalog="green00" type="TABLE">
-      <column name="plugin_id" sqlType="MEDIUMINT UNSIGNED" length="8" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="plugin_status" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ=="/>
-      <column name="plugin_title" sqlType="CHAR" length="20" precision="0" nullable="false" jdbcType="1"/>
-      <column name="plugin_description" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
-      <column name="plugin_author" sqlType="CHAR" length="20" precision="0" nullable="false" jdbcType="1"/>
-      <column name="plugin_copyright" sqlType="CHAR" length="50" precision="0" nullable="false" jdbcType="1"/>
-      <column name="plugin_pubdate" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <primary-key name="PRIMARY" columns="plugin_id"/>
-      <index name="status" unique="false" columns="plugin_status"/>
-    </table>
-    <table name="green_post_cat" schema="" catalog="green00" type="TABLE">
-      <column name="pc_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="cat_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <column name="post_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <primary-key name="PRIMARY" columns="pc_id"/>
-    </table>
-    <table name="green_post_meta" schema="" catalog="green00" type="TABLE">
-      <column name="meta_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="post_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <column name="meta_key" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="meta_value" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1"/>
-      <primary-key name="PRIMARY" columns="meta_id"/>
-      <index name="meta_key" unique="false" columns="meta_key"/>
-      <index name="post_id" unique="false" columns="post_id"/>
-    </table>
-    <table name="green_post_tag" schema="" catalog="green00" type="TABLE">
-      <column name="pt_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="tag_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <column name="post_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <primary-key name="PRIMARY" columns="pt_id"/>
-    </table>
-    <table name="green_posts" schema="" catalog="green00" type="TABLE">
-      <column name="post_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
-      <column name="post_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <column name="post_content" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
-      <column name="post_title" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
-      <column name="post_status" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="J3B1Ymxpc2gn"/>
-      <column name="post_comment_status" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="J29wZW4n"/>
-      <column name="post_password" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
-      <column name="post_name" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
-      <column name="post_template" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="J3NpbmdsZSc="/>
-      <column name="post_modified" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
-      <column name="post_comment_count" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
-      <column name="post_view_count" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
-      <column name="post_type" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="J3NpbmdsZSc="/>
-      <column name="post_img" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="post_top" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5" def="MA=="/>
-      <primary-key name="PRIMARY" columns="post_id"/>
-      <index name="post_author" unique="false" columns="user_id"/>
-      <index name="post_name" unique="false" columns="post_name"/>
-      <index name="type_status_date" unique="false" columns="post_status,post_date,post_id"/>
-    </table>
-    <table name="green_role" schema="" catalog="green00" type="TABLE">
-      <column name="id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
-      <column name="pid" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
-      <column name="status" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="true" jdbcType="-6"/>
-      <column name="remark" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <index name="pid" unique="false" columns="pid"/>
-      <index name="status" unique="false" columns="status"/>
-    </table>
-    <table name="green_role_users" schema="" catalog="green00" type="TABLE">
-      <column name="role_id" sqlType="MEDIUMINT UNSIGNED" length="8" precision="0" nullable="true" jdbcType="4"/>
-      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <primary-key name="PRIMARY" columns="user_id"/>
-      <index name="group_id" unique="false" columns="role_id"/>
-      <index name="user_id" unique="false" columns="user_id"/>
-    </table>
-    <table name="green_tags" schema="" catalog="green00" type="TABLE">
-      <column name="tag_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="tag_name" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="tag_slug" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="tag_group" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <primary-key name="PRIMARY" columns="tag_id"/>
-      <index name="slug" unique="true" columns="tag_slug"/>
-      <index name="name" unique="false" columns="tag_name"/>
-    </table>
-    <table name="green_user" schema="" catalog="green00" type="TABLE">
-      <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="user_login" sqlType="VARCHAR" length="60" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="user_pass" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="user_nicename" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="user_email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="user_url" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
-      <column name="user_registered" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <column name="user_activation_key" sqlType="VARCHAR" length="60" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
-      <column name="user_status" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MQ=="/>
-      <column name="user_intro" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
-      <column name="user_level" sqlType="SMALLINT" length="5" precision="0" nullable="false" jdbcType="5" def="MTA="/>
-      <column name="user_session" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="user_id"/>
-      <index name="user_login_key" unique="false" columns="user_login"/>
-      <index name="user_nicename" unique="false" columns="user_nicename"/>
-    </table>
-    <table name="green_user_detail" schema="" catalog="green00" type="TABLE">
-      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="user_into" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="user_id"/>
-    </table>
-    <table name="green_weixinaction" schema="" catalog="green00" type="TABLE">
-      <column name="wx_action_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="action_type" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
-      <column name="action_name" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
-      <column name="reply_type" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
-      <column name="reply_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <column name="time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
-      <primary-key name="PRIMARY" columns="wx_action_id"/>
-    </table>
-    <table name="green_weixinlog" schema="" catalog="green00" type="TABLE">
-      <column name="log_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="MsgId" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="FromUserName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="ToUserName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="CreateTime" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="Content" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="MsgType" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="Location_X" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="Location_Y" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="Scale" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="Label" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="PicUrl" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="isread" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5" def="MA=="/>
-      <primary-key name="PRIMARY" columns="log_id"/>
-      <index name="createtime" unique="false" columns="CreateTime"/>
-    </table>
-    <table name="green_weixinre" schema="" catalog="green00" type="TABLE">
-      <column name="wx_re_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="content" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="type" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12"/>
-      <column name="mediaId" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12"/>
-      <column name="title" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12"/>
-      <column name="description" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="picurl" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="url" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="group" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
-      <column name="time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <primary-key name="PRIMARY" columns="wx_re_id"/>
-    </table>
-    <table name="green_weixinsend" schema="" catalog="green00" type="TABLE">
-      <column name="weixin_send_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="MsgId_to" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="openid" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="type" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="content" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="CreateTime" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <primary-key name="PRIMARY" columns="weixin_send_id"/>
-    </table>
-    <table name="green_weixinuser" schema="" catalog="green00" type="TABLE">
-      <column name="weixin_userid" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="openid" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
-      <column name="subscribe" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
-      <column name="nickname" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="sex" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
-      <column name="language" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="city" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="province" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="country" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="headimgurl" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <column name="subscribe_time" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="weixin_userid"/>
-    </table>
     <table name="api_version" schema="" catalog="greenapi" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="version" sqlType="VARCHAR" length="25" precision="0" nullable="false" jdbcType="12"/>
@@ -2416,19 +2008,357 @@
       <column name="applied" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
+    <table name="green_access" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="role_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" def="MQ=="/>
+      <column name="node_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5"/>
+      <column name="level" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6"/>
+      <column name="pid" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <column name="module" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <index name="groupId" unique="false" columns="role_id"/>
+      <index name="nodeId" unique="false" columns="node_id"/>
+    </table>
+    <table name="green_addons" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" remarks="5Li76ZSu" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="40" precision="0" nullable="false" jdbcType="12" remarks="5o+S5Lu25ZCN5oiW5qCH6K+G"/>
+      <column name="title" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12" def="Jyc=" remarks="5Lit5paH5ZCN"/>
+      <column name="description" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="5o+S5Lu25o+P6L+w"/>
+      <column name="status" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ==" remarks="54q25oCB"/>
+      <column name="config" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="6YWN572u"/>
+      <column name="author" sqlType="VARCHAR" length="40" precision="0" nullable="true" jdbcType="12" def="Jyc=" remarks="5L2c6ICF"/>
+      <column name="version" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="Jyc=" remarks="54mI5pys5Y+3"/>
+      <column name="create_time" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" remarks="5a6J6KOF5pe26Ze0"/>
+      <column name="has_adminlist" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6" def="MA==" remarks="5piv5ZCm5pyJ5ZCO5Y+w5YiX6KGo"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="green_cats" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="cat_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="cat_father" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="cat_slug" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="cat_name" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="cat_order" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="cat_id"/>
+      <index name="slug" unique="true" columns="cat_slug"/>
+      <index name="name" unique="false" columns="cat_name"/>
+    </table>
+    <table name="green_comments" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="comment_ID" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="comment_post_ID" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="comment_author" sqlType="TINYTEXT" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="comment_author_email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="comment_author_url" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="comment_author_IP" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="comment_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="comment_content" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="comment_approved" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12" def="JzEn"/>
+      <column name="comment_parent" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="comment_ID"/>
+      <index name="comment_approved_date_gmt" unique="false" columns="comment_approved"/>
+      <index name="comment_parent" unique="false" columns="comment_parent"/>
+      <index name="comment_post_ID" unique="false" columns="comment_post_ID"/>
+    </table>
+    <table name="green_feedback" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="fid" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J2Fub255bW91cyc="/>
+      <column name="email" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="comment" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J1dhaXRpbmcn"/>
+      <primary-key name="PRIMARY" columns="fid"/>
+    </table>
+    <table name="green_form" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="fa_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="class" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="tel" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="direction" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="message" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="fa_id"/>
+    </table>
+    <table name="green_hooks" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" remarks="5Li76ZSu" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="40" precision="0" nullable="false" jdbcType="12" def="Jyc=" remarks="6ZKp5a2Q5ZCN56ew"/>
+      <column name="description" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1" remarks="5o+P6L+w"/>
+      <column name="type" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ==" remarks="57G75Z6L"/>
+      <column name="update_time" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" remarks="5pu05paw5pe26Ze0"/>
+      <column name="addons" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="Jyc=" remarks="6ZKp5a2Q5oyC6L2955qE5o+S5Lu2ICfvvIwn5YiG5Ymy"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="搜索索引" unique="true" columns="name"/>
+    </table>
+    <table name="green_kv" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="kv_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="kv_key" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="kv_value" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="kv_id"/>
+    </table>
+    <table name="green_link_group" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="link_group_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="link_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="link_group_name" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="link_group_id"/>
+    </table>
+    <table name="green_links" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="link_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="link_sort" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5" def="MA=="/>
+      <column name="link_url" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="link_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="link_tag" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="link_description" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="link_visible" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6" def="MQ=="/>
+      <column name="link_img" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="link_group_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="link_id"/>
+      <index name="link_visible" unique="false" columns="link_visible"/>
+    </table>
+    <table name="green_log" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="log_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <primary-key name="PRIMARY" columns="log_id"/>
+    </table>
+    <table name="green_login_log" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="login_log_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="log_user_id" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="log_user_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="log_password" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="log_geo" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="log_time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="log_ip" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="log_status" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <primary-key name="PRIMARY" columns="login_log_id"/>
+    </table>
+    <table name="green_menu" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="menu_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="menu_pid" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="menu_sort" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="OTk="/>
+      <column name="menu_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="menu_action" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J19zZWxmJw=="/>
+      <column name="menu_function" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="menu_position" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J2hlYWQn"/>
+      <column name="menu_url" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="menu_id"/>
+    </table>
+    <table name="green_mysql" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="mysql_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <primary-key name="PRIMARY" columns="mysql_id"/>
+    </table>
+    <table name="green_node" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="title" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <column name="remark" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="sort" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <column name="pid" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5"/>
+      <column name="level" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="level" unique="false" columns="level"/>
+      <index name="name" unique="false" columns="name"/>
+      <index name="pid" unique="false" columns="pid"/>
+      <index name="status" unique="false" columns="status"/>
+    </table>
+    <table name="green_options" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="option_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="option_name" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="option_value" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="autoload" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12" def="J3llcyc="/>
+      <primary-key name="PRIMARY" columns="option_id"/>
+      <index name="option_name" unique="true" columns="option_name"/>
+    </table>
+    <table name="green_plugin" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="plugin_id" sqlType="MEDIUMINT UNSIGNED" length="8" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="plugin_status" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="plugin_title" sqlType="CHAR" length="20" precision="0" nullable="false" jdbcType="1"/>
+      <column name="plugin_description" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="plugin_author" sqlType="CHAR" length="20" precision="0" nullable="false" jdbcType="1"/>
+      <column name="plugin_copyright" sqlType="CHAR" length="50" precision="0" nullable="false" jdbcType="1"/>
+      <column name="plugin_pubdate" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="plugin_id"/>
+      <index name="status" unique="false" columns="plugin_status"/>
+    </table>
+    <table name="green_post_cat" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="pc_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="cat_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="post_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="pc_id"/>
+    </table>
+    <table name="green_post_meta" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="meta_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="post_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="meta_key" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="meta_value" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="meta_id"/>
+      <index name="meta_key" unique="false" columns="meta_key"/>
+      <index name="post_id" unique="false" columns="post_id"/>
+    </table>
+    <table name="green_post_tag" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="pt_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="tag_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="post_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="pt_id"/>
+    </table>
+    <table name="green_posts" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="post_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
+      <column name="post_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="post_content" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="post_title" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="post_status" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="J3B1Ymxpc2gn"/>
+      <column name="post_comment_status" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="J29wZW4n"/>
+      <column name="post_password" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="post_name" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
+      <column name="post_template" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="J3NpbmdsZSc="/>
+      <column name="post_modified" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="post_comment_count" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
+      <column name="post_view_count" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
+      <column name="post_type" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="J3NpbmdsZSc="/>
+      <column name="post_img" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="post_top" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="post_id"/>
+      <index name="post_author" unique="false" columns="user_id"/>
+      <index name="post_name" unique="false" columns="post_name"/>
+      <index name="type_status_date" unique="false" columns="post_status,post_date,post_id"/>
+    </table>
+    <table name="green_role" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="pid" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <column name="status" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="true" jdbcType="-6"/>
+      <column name="remark" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="pid" unique="false" columns="pid"/>
+      <index name="status" unique="false" columns="status"/>
+    </table>
+    <table name="green_role_users" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="role_id" sqlType="MEDIUMINT UNSIGNED" length="8" precision="0" nullable="true" jdbcType="4"/>
+      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+      <index name="group_id" unique="false" columns="role_id"/>
+      <index name="user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="green_tags" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="tag_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="tag_name" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="tag_slug" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="tag_group" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="tag_id"/>
+      <index name="slug" unique="true" columns="tag_slug"/>
+      <index name="name" unique="false" columns="tag_name"/>
+    </table>
+    <table name="green_user" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="user_login" sqlType="VARCHAR" length="60" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="user_pass" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="user_nicename" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="user_email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="user_url" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="user_registered" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="user_activation_key" sqlType="VARCHAR" length="60" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="user_status" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MQ=="/>
+      <column name="user_intro" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
+      <column name="user_level" sqlType="SMALLINT" length="5" precision="0" nullable="false" jdbcType="5" def="MTA="/>
+      <column name="user_session" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+      <index name="user_login_key" unique="false" columns="user_login"/>
+      <index name="user_nicename" unique="false" columns="user_nicename"/>
+    </table>
+    <table name="green_user_detail" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="user_into" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+    </table>
+    <table name="green_user_sns" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="us_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
+      <column name="access_token" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="refresh_token" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="remind_in" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="expires_in" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="openid" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="expires_time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="us_id"/>
+      <index name="useropen" unique="false" columns="user_id"/>
+    </table>
+    <table name="green_weixinaction" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="wx_action_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="action_type" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="action_name" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="reply_type" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="reply_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="wx_action_id"/>
+    </table>
+    <table name="green_weixinlog" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="log_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="MsgId" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="FromUserName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="ToUserName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="CreateTime" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Content" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="MsgType" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Location_X" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Location_Y" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Scale" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Label" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="PicUrl" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="isread" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="log_id"/>
+      <index name="createtime" unique="false" columns="CreateTime"/>
+    </table>
+    <table name="green_weixinre" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="wx_re_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="content" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12"/>
+      <column name="mediaId" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12"/>
+      <column name="title" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="picurl" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="url" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="group" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="wx_re_id"/>
+    </table>
+    <table name="green_weixinsend" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="weixin_send_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="MsgId_to" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="openid" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="content" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="CreateTime" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="weixin_send_id"/>
+    </table>
+    <table name="green_weixinuser" schema="" catalog="greencms-sae" type="TABLE">
+      <column name="weixin_userid" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="openid" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="subscribe" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <column name="nickname" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="sex" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <column name="language" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="city" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="province" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="country" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="headimgurl" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="subscribe_time" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="weixin_userid"/>
+    </table>
     <table name="auth_codes" schema="" catalog="greenoathu" type="TABLE">
-      <column name="code" sqlType="VARCHAR" length="40" precision="0" nullable="false" jdbcType="12"/>
-      <column name="client_id" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="code" sqlType="VARCHAR" length="40" precision="0" nullable="true" jdbcType="12"/>
+      <column name="client_id" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
       <column name="redirect_uri" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12"/>
-      <column name="expires" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="expires" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="scope" sqlType="VARCHAR" length="250" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="code"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="client1" columns="client_id" ref-table="clients" ref-schema="" ref-catalog="greenoathu" ref-columns="client_id" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="clients" schema="" catalog="greenoathu" type="TABLE">
-      <column name="client_id" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
-      <column name="client_secret" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
-      <column name="redirect_uri" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="client_id"/>
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="client_id" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="client_secret" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="redirect_uri" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="client_name" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="client1" table="auth_codes" schema="" catalog="greenoathu" columns="client_id"/>
+      <index name="client_id" unique="false" columns="client_id"/>
     </table>
     <table name="green_access" schema="" catalog="greenoathu" type="TABLE">
       <column name="role_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" def="MQ=="/>
@@ -2442,8 +2372,8 @@
     <table name="green_options" schema="" catalog="greenoathu" type="TABLE">
       <column name="option_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="option_name" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="option_value" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
-      <column name="autoload" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12" def="J3llcyc="/>
+      <column name="option_value" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12"/>
+      <column name="autoload" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="J3llcyc="/>
       <primary-key name="PRIMARY" columns="option_id"/>
       <index name="option_name" unique="true" columns="option_name"/>
     </table>
@@ -2482,12 +2412,13 @@
       <index name="user_login_key" unique="false" columns="user_login"/>
       <index name="user_nicename" unique="false" columns="user_nicename"/>
     </table>
-    <table name="tokens" schema="" catalog="greenoathu" type="TABLE">
-      <column name="oauth_token" sqlType="VARCHAR" length="40" precision="0" nullable="false" jdbcType="12"/>
-      <column name="client_id" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
-      <column name="expires" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="scope" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="oauth_token"/>
+    <table name="user_cache" schema="" catalog="greenoathu" type="TABLE">
+      <column name="uc_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="uc_name" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <column name="uc_pass" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <column name="uc_info" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <column name="uc_token" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="uc_id"/>
     </table>
     <table name="access" schema="" catalog="greenstudio" type="TABLE">
       <column name="role_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" def="MQ=="/>
@@ -3761,48 +3692,16 @@
       <column name="CHARACTER_SET_CLIENT" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="COLLATION_CONNECTION" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
     </table>
-    <table name="bjdmb" schema="" catalog="kczl" type="TABLE"/>
-    <table name="cjb201308092239" schema="" catalog="kczl" type="TABLE"/>
     <table name="college" schema="" catalog="kczl" type="TABLE"/>
-    <table name="comment" schema="" catalog="kczl" type="TABLE"/>
-    <table name="course_schedule" schema="" catalog="kczl" type="TABLE"/>
-    <table name="course_schedule20130916_2" schema="" catalog="kczl" type="TABLE"/>
-    <table name="course_schedule20130928_2" schema="" catalog="kczl" type="TABLE"/>
     <table name="course_task" schema="" catalog="kczl" type="TABLE"/>
-    <table name="course_task20130924" schema="" catalog="kczl" type="TABLE"/>
-    <table name="course_time" schema="" catalog="kczl" type="TABLE"/>
     <table name="district" schema="" catalog="kczl" type="TABLE"/>
-    <table name="evl_daily" schema="" catalog="kczl" type="TABLE"/>
-    <table name="feedback" schema="" catalog="kczl" type="TABLE"/>
     <table name="field" schema="" catalog="kczl" type="TABLE"/>
     <table name="js" schema="" catalog="kczl" type="TABLE"/>
-    <table name="jxb2013_2014" schema="" catalog="kczl" type="TABLE"/>
-    <table name="jxcdxxb" schema="" catalog="kczl" type="TABLE"/>
-    <table name="jxjh200916" schema="" catalog="kczl" type="TABLE"/>
-    <table name="jxjhkc2010" schema="" catalog="kczl" type="TABLE"/>
-    <table name="kcdmb20130924" schema="" catalog="kczl" type="TABLE"/>
-    <table name="likelist" schema="" catalog="kczl" type="TABLE"/>
-    <table name="message_log" schema="" catalog="kczl" type="TABLE"/>
-    <table name="message_unsent" schema="" catalog="kczl" type="TABLE"/>
     <table name="nature_class" schema="" catalog="kczl" type="TABLE"/>
-    <table name="new_kcdm" schema="" catalog="kczl" type="TABLE"/>
-    <table name="notification" schema="" catalog="kczl" type="TABLE"/>
-    <table name="parameter" schema="" catalog="kczl" type="TABLE"/>
-    <table name="qa_list" schema="" catalog="kczl" type="TABLE"/>
-    <table name="qa_log" schema="" catalog="kczl" type="TABLE"/>
-    <table name="qa_token" schema="" catalog="kczl" type="TABLE"/>
-    <table name="school_calendar" schema="" catalog="kczl" type="TABLE"/>
     <table name="school_course" schema="" catalog="kczl" type="TABLE"/>
     <table name="school_student" schema="" catalog="kczl" type="TABLE"/>
     <table name="school_teacher" schema="" catalog="kczl" type="TABLE"/>
-    <table name="score" schema="" catalog="kczl" type="TABLE"/>
     <table name="student_info" schema="" catalog="kczl" type="TABLE"/>
-    <table name="summary" schema="" catalog="kczl" type="TABLE"/>
-    <table name="t_student_course" schema="" catalog="kczl" type="TABLE"/>
-    <table name="t_student_course20130916" schema="" catalog="kczl" type="TABLE"/>
-    <table name="t_student_course20130925" schema="" catalog="kczl" type="TABLE"/>
-    <table name="teacher_info" schema="" catalog="kczl" type="TABLE"/>
-    <table name="teacher_reply" schema="" catalog="kczl" type="TABLE"/>
     <table name="university" schema="" catalog="kczl" type="TABLE"/>
     <table name="user" schema="" catalog="kczl" type="TABLE"/>
     <table name="v_count" schema="" catalog="kczl" type="VIEW"/>
@@ -3816,7 +3715,6 @@
     <table name="xsxkb20130905" schema="" catalog="kczl" type="TABLE"/>
     <table name="xsxx" schema="" catalog="kczl" type="TABLE"/>
     <table name="zydmb" schema="" catalog="kczl" type="TABLE"/>
-    <table name="花爷的成绩" schema="" catalog="kczl" type="TABLE"/>
     <table name="college" schema="" catalog="kxzl" type="TABLE">
       <column name="coid" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="collegecode" sqlType="VARCHAR" length="4" precision="0" nullable="true" jdbcType="12"/>
@@ -6292,11 +6190,26 @@
       <primary-key name="PRIMARY" columns="id"/>
       <index name="搜索索引" unique="true" columns="name"/>
     </table>
+    <table name="xsc_joinus" schema="" catalog="xsc" type="TABLE">
+      <column name="fa_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="class" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="tel" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="direction" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="message" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="fa_id"/>
+    </table>
     <table name="xsc_kv" schema="" catalog="xsc" type="TABLE">
       <column name="kv_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="kv_key" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
       <column name="kv_value" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="kv_id"/>
+    </table>
+    <table name="xsc_link_group" schema="" catalog="xsc" type="TABLE">
+      <column name="link_group_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="link_group_name" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="link_group_id"/>
     </table>
     <table name="xsc_links" schema="" catalog="xsc" type="TABLE">
       <column name="link_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -6307,11 +6220,17 @@
       <column name="link_description" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="link_visible" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6" def="MQ=="/>
       <column name="link_img" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="link_group_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="link_id"/>
       <index name="link_visible" unique="false" columns="link_visible"/>
     </table>
     <table name="xsc_log" schema="" catalog="xsc" type="TABLE">
-      <column name="log_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="log_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="group_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="module_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="action_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="message" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="log_id"/>
     </table>
     <table name="xsc_login_log" schema="" catalog="xsc" type="TABLE">
@@ -6559,6 +6478,362 @@
       <column name="subscribe_time" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="weixin_userid"/>
     </table>
+    <table name="zts1993_access" schema="" catalog="zts1993" type="TABLE">
+      <column name="role_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" def="MQ=="/>
+      <column name="node_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5"/>
+      <column name="level" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6"/>
+      <column name="pid" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <column name="module" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <index name="groupId" unique="false" columns="role_id"/>
+      <index name="nodeId" unique="false" columns="node_id"/>
+    </table>
+    <table name="zts1993_addons" schema="" catalog="zts1993" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="5Li76ZSu" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="40" precision="0" nullable="false" jdbcType="12" remarks="5o+S5Lu25ZCN5oiW5qCH6K+G"/>
+      <column name="title" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12" def="Jyc=" remarks="5Lit5paH5ZCN"/>
+      <column name="description" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="5o+S5Lu25o+P6L+w"/>
+      <column name="status" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ==" remarks="54q25oCB"/>
+      <column name="config" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="6YWN572u"/>
+      <column name="author" sqlType="VARCHAR" length="40" precision="0" nullable="true" jdbcType="12" def="Jyc=" remarks="5L2c6ICF"/>
+      <column name="version" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="Jyc=" remarks="54mI5pys5Y+3"/>
+      <column name="create_time" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" remarks="5a6J6KOF5pe26Ze0"/>
+      <column name="has_adminlist" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6" def="MA==" remarks="5piv5ZCm5pyJ5ZCO5Y+w5YiX6KGo"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="zts1993_cats" schema="" catalog="zts1993" type="TABLE">
+      <column name="cat_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="cat_father" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="cat_slug" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="cat_name" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="cat_order" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="cat_id"/>
+      <index name="slug" unique="true" columns="cat_slug"/>
+      <index name="name" unique="false" columns="cat_name"/>
+    </table>
+    <table name="zts1993_comments" schema="" catalog="zts1993" type="TABLE">
+      <column name="comment_ID" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="comment_post_ID" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="comment_author" sqlType="TINYTEXT" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="comment_author_email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="comment_author_url" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="comment_author_IP" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="comment_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="comment_content" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="comment_approved" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12" def="JzEn"/>
+      <column name="comment_parent" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="comment_ID"/>
+      <index name="comment_approved_date_gmt" unique="false" columns="comment_approved"/>
+      <index name="comment_parent" unique="false" columns="comment_parent"/>
+      <index name="comment_post_ID" unique="false" columns="comment_post_ID"/>
+    </table>
+    <table name="zts1993_form" schema="" catalog="zts1993" type="TABLE">
+      <column name="fa_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="class" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="tel" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="direction" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="message" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="fa_id"/>
+    </table>
+    <table name="zts1993_guestbook" schema="" catalog="zts1993" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="TINYTEXT" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="tel" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <column name="title" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="content" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="date" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="ip" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="reply" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
+      <column name="status" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MQ=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="zts1993_hooks" schema="" catalog="zts1993" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" remarks="5Li76ZSu" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="40" precision="0" nullable="false" jdbcType="12" def="Jyc=" remarks="6ZKp5a2Q5ZCN56ew"/>
+      <column name="description" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1" remarks="5o+P6L+w"/>
+      <column name="type" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ==" remarks="57G75Z6L"/>
+      <column name="update_time" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" remarks="5pu05paw5pe26Ze0"/>
+      <column name="addons" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="Jyc=" remarks="6ZKp5a2Q5oyC6L2955qE5o+S5Lu2ICfvvIwn5YiG5Ymy"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="搜索索引" unique="true" columns="name"/>
+    </table>
+    <table name="zts1993_joinus" schema="" catalog="zts1993" type="TABLE">
+      <column name="fa_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="class" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="tel" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="direction" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="message" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="fa_id"/>
+    </table>
+    <table name="zts1993_kv" schema="" catalog="zts1993" type="TABLE">
+      <column name="kv_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="kv_key" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="kv_value" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="kv_id"/>
+    </table>
+    <table name="zts1993_link_group" schema="" catalog="zts1993" type="TABLE">
+      <column name="link_group_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="link_group_name" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="link_group_id"/>
+    </table>
+    <table name="zts1993_links" schema="" catalog="zts1993" type="TABLE">
+      <column name="link_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="link_sort" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5" def="MA=="/>
+      <column name="link_url" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="link_name" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="link_tag" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="link_description" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="link_visible" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6" def="MQ=="/>
+      <column name="link_img" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="link_group_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="link_id"/>
+      <index name="link_visible" unique="false" columns="link_visible"/>
+    </table>
+    <table name="zts1993_log" schema="" catalog="zts1993" type="TABLE">
+      <column name="log_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="log_type" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="log_time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="group_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="module_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="action_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="user_ip" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="message" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="log_id"/>
+    </table>
+    <table name="zts1993_login_log" schema="" catalog="zts1993" type="TABLE">
+      <column name="login_log_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="log_user_id" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="log_user_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="log_password" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="log_geo" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="log_time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="log_ip" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="log_status" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <primary-key name="PRIMARY" columns="login_log_id"/>
+    </table>
+    <table name="zts1993_menu" schema="" catalog="zts1993" type="TABLE">
+      <column name="menu_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="menu_pid" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="menu_sort" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="OTk="/>
+      <column name="menu_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="menu_action" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J19zZWxmJw=="/>
+      <column name="menu_function" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="menu_position" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="J2hlYWQn"/>
+      <column name="menu_url" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="menu_id"/>
+    </table>
+    <table name="zts1993_mysql" schema="" catalog="zts1993" type="TABLE">
+      <column name="mysql_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <primary-key name="PRIMARY" columns="mysql_id"/>
+    </table>
+    <table name="zts1993_node" schema="" catalog="zts1993" type="TABLE">
+      <column name="id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="title" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <column name="remark" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="sort" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <column name="pid" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5"/>
+      <column name="level" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="level" unique="false" columns="level"/>
+      <index name="name" unique="false" columns="name"/>
+      <index name="pid" unique="false" columns="pid"/>
+      <index name="status" unique="false" columns="status"/>
+    </table>
+    <table name="zts1993_options" schema="" catalog="zts1993" type="TABLE">
+      <column name="option_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="option_name" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="option_value" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="autoload" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12" def="J3llcyc="/>
+      <primary-key name="PRIMARY" columns="option_id"/>
+      <index name="option_name" unique="true" columns="option_name"/>
+    </table>
+    <table name="zts1993_plugin" schema="" catalog="zts1993" type="TABLE">
+      <column name="plugin_id" sqlType="MEDIUMINT UNSIGNED" length="8" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="plugin_status" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="plugin_title" sqlType="CHAR" length="20" precision="0" nullable="false" jdbcType="1"/>
+      <column name="plugin_description" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="plugin_author" sqlType="CHAR" length="20" precision="0" nullable="false" jdbcType="1"/>
+      <column name="plugin_copyright" sqlType="CHAR" length="50" precision="0" nullable="false" jdbcType="1"/>
+      <column name="plugin_pubdate" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="plugin_id"/>
+      <index name="status" unique="false" columns="plugin_status"/>
+    </table>
+    <table name="zts1993_post_cat" schema="" catalog="zts1993" type="TABLE">
+      <column name="pc_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="cat_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="post_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="pc_id"/>
+    </table>
+    <table name="zts1993_post_meta" schema="" catalog="zts1993" type="TABLE">
+      <column name="meta_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="post_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="meta_key" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="meta_value" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="meta_id"/>
+      <index name="meta_key" unique="false" columns="meta_key"/>
+      <index name="post_id" unique="false" columns="post_id"/>
+    </table>
+    <table name="zts1993_post_tag" schema="" catalog="zts1993" type="TABLE">
+      <column name="pt_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="tag_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="post_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="pt_id"/>
+    </table>
+    <table name="zts1993_posts" schema="" catalog="zts1993" type="TABLE">
+      <column name="post_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
+      <column name="post_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="post_content" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="post_title" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="post_status" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="J3B1Ymxpc2gn"/>
+      <column name="post_comment_status" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="J29wZW4n"/>
+      <column name="post_password" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="post_name" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
+      <column name="post_template" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="J3NpbmdsZSc="/>
+      <column name="post_modified" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="post_comment_count" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
+      <column name="post_view_count" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
+      <column name="post_type" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="J3NpbmdsZSc="/>
+      <column name="post_img" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="post_top" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5" def="MA=="/>
+      <column name="post_url" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="post_id"/>
+      <index name="post_author" unique="false" columns="user_id"/>
+      <index name="post_name" unique="false" columns="post_name"/>
+      <index name="type_status_date" unique="false" columns="post_status,post_date,post_id"/>
+    </table>
+    <table name="zts1993_role" schema="" catalog="zts1993" type="TABLE">
+      <column name="id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="pid" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <column name="status" sqlType="TINYINT UNSIGNED" length="3" precision="0" nullable="true" jdbcType="-6"/>
+      <column name="remark" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="cataccess" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="pid" unique="false" columns="pid"/>
+      <index name="status" unique="false" columns="status"/>
+    </table>
+    <table name="zts1993_role_users" schema="" catalog="zts1993" type="TABLE">
+      <column name="role_id" sqlType="MEDIUMINT UNSIGNED" length="8" precision="0" nullable="true" jdbcType="4"/>
+      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+      <index name="group_id" unique="false" columns="role_id"/>
+      <index name="user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="zts1993_tags" schema="" catalog="zts1993" type="TABLE">
+      <column name="tag_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="tag_name" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="tag_slug" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="tag_group" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="tag_id"/>
+      <index name="slug" unique="true" columns="tag_slug"/>
+      <index name="name" unique="false" columns="tag_name"/>
+    </table>
+    <table name="zts1993_user" schema="" catalog="zts1993" type="TABLE">
+      <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="user_login" sqlType="VARCHAR" length="60" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="user_pass" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="user_nicename" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="user_email" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="user_url" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="user_registered" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="user_activation_key" sqlType="VARCHAR" length="60" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="user_status" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MQ=="/>
+      <column name="user_intro" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
+      <column name="user_level" sqlType="SMALLINT" length="5" precision="0" nullable="false" jdbcType="5" def="MTA="/>
+      <column name="user_session" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+      <index name="user_login_key" unique="false" columns="user_login"/>
+      <index name="user_nicename" unique="false" columns="user_nicename"/>
+    </table>
+    <table name="zts1993_user_detail" schema="" catalog="zts1993" type="TABLE">
+      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="user_into" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+    </table>
+    <table name="zts1993_user_sns" schema="" catalog="zts1993" type="TABLE">
+      <column name="us_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" def="MA=="/>
+      <column name="access_token" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="refresh_token" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="remind_in" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="expires_in" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="openid" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="expires_time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="us_id"/>
+      <index name="useropen" unique="false" columns="user_id"/>
+    </table>
+    <table name="zts1993_weixinaction" schema="" catalog="zts1993" type="TABLE">
+      <column name="wx_action_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="action_type" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="action_name" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="reply_type" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="reply_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="wx_action_id"/>
+    </table>
+    <table name="zts1993_weixinlog" schema="" catalog="zts1993" type="TABLE">
+      <column name="log_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="MsgId" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="FromUserName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="ToUserName" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="CreateTime" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Content" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="MsgType" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Location_X" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Location_Y" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Scale" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Label" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="PicUrl" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="isread" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="log_id"/>
+      <index name="createtime" unique="false" columns="CreateTime"/>
+    </table>
+    <table name="zts1993_weixinre" schema="" catalog="zts1993" type="TABLE">
+      <column name="wx_re_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="content" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12"/>
+      <column name="mediaId" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12"/>
+      <column name="title" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="picurl" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="url" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="group" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="time" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="wx_re_id"/>
+    </table>
+    <table name="zts1993_weixinsend" schema="" catalog="zts1993" type="TABLE">
+      <column name="weixin_send_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="MsgId_to" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="openid" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="content" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="CreateTime" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="weixin_send_id"/>
+    </table>
+    <table name="zts1993_weixinuser" schema="" catalog="zts1993" type="TABLE">
+      <column name="weixin_userid" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="openid" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="subscribe" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <column name="nickname" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="sex" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
+      <column name="language" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="city" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="province" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="country" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="headimgurl" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="subscribe_time" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="weixin_userid"/>
+    </table>
     <table name="access" schema="" catalog="zzb" type="TABLE">
       <column name="role_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" def="MQ=="/>
       <column name="node_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5"/>
@@ -6742,6 +7017,12 @@
       <index name="user_login_key" unique="false" columns="user_login"/>
       <index name="user_nicename" unique="false" columns="user_nicename"/>
     </table>
+    <procedure name="p_dir_info" schema="" catalog="disk" type="1">
+      <prototype>
+        <parameter name="user" sqlType="VARCHAR" length="20" precision="20" nullable="true" jdbcType="12" type="1" index="1"/>
+        <parameter name="parent_path" sqlType="VARCHAR" length="255" precision="255" nullable="true" jdbcType="12" type="1" index="2"/>
+      </prototype>
+    </procedure>
   </data-source>
   <data-source source="LOCAL" name="hibernate.cfg.xml" uuid="e4055904-c11f-4882-b1f2-1d825eec422d">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>

@@ -13,6 +13,7 @@
           <element id="library" level="project" name="mysql-connector-java-5.0.7-bin" />
           <element id="library" level="project" name="Spring-3.2.8.RELEASE" />
           <element id="library" level="project" name="log4j" />
+          <element id="library" level="project" name="struts2-json-plugin-2.3.16" />
         </element>
       </element>
     </root>

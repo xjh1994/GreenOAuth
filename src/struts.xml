@@ -57,15 +57,10 @@
         </action>
     </package>
 
-    <package name="client" namespace="/oauth2" extends="struts-default">
+    <package name="client" namespace="/oauth2" extends="struts-default,json-default">
 
         <action name="login" class="com.zts1993.Action.Client.LoginPageAction">
             <result name="success">/page/client/loginPage.jsp</result>
-        </action>
-
-        <action name="accessToken" class="com.zts1993.Action.Client.AccessTokenAction">
-
-            <result name="success">/page/client/accessToken.jsp</result>
         </action>
 
         <action name="loginHanlde" class="com.zts1993.Action.Client.LoginAction">
@@ -78,7 +73,6 @@
 
             <result name="input">/page/client/loginPage.jsp</result>
 
-            
         </action>
 
 
@@ -87,9 +81,18 @@
         </action>
 
 
+        <action name="authorizeHandle" class="com.zts1993.Action.Client.AuthorizeHandleAction">
+            <result name="success">/page/client/authorizeHandle.jsp</result>
+            <result name="callback" type="redirect">
+                ${redirect_uri_final}
+            </result>
+        </action>
 
+        <action name="access_token" class="com.zts1993.Action.Client.AccessTokenAction">
+            <result name="success" type="json">
+                <param name="includeProperties">access_token,expires_in,remind_in,uid</param>
 
-        <action name="access_token">
+            </result>
 
         </action>
 

@@ -3,11 +3,22 @@ package com.zts1993.Action.Client;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * Created by TianShuo on 14-6-21.
+ * Created by TianShuo on 14-6-25.
  */
-public class AuthorizePageAction extends ActionSupport {
+public class AuthorizeHandleAction extends ActionSupport {
 
     private String client_id;
+    private String response_type;
+    private String redirect_uri;
+    private String redirect_uri_final;
+
+    public String getRedirect_uri_final() {
+        return redirect_uri_final;
+    }
+
+    public void setRedirect_uri_final(String redirect_uri_final) {
+        this.redirect_uri_final = redirect_uri_final;
+    }
 
     public String getResponse_type() {
         return response_type;
@@ -33,14 +44,14 @@ public class AuthorizePageAction extends ActionSupport {
         this.redirect_uri = redirect_uri;
     }
 
-    private String response_type;
-    private String redirect_uri;
-
 
     public String execute() throws Exception {
 
 
-        return "success";
+        redirect_uri_final=redirect_uri+"/code/1561";
+        return "callback";
 
     }
+
+
 }

@@ -9,5 +9,6 @@
 <body>
 
  <s:a namespace="/login" name="index" action="login">立即登陆</s:a>
+ <s:a namespace="/oauth2" name="login" action="login">oauth登陆</s:a>
 </body>
 </html>
