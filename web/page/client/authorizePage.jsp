@@ -19,9 +19,8 @@
 
 <s:form action="authorizeHandle" method="post" id="loginForm">
 
-    <s:hidden name="client_id" >${client_id}</s:hidden>
-    <br/>
-    <s:hidden name="redirect_uri"  >${redirect_uri}</s:hidden>
+    <s:hidden name="client_id" value="%{client_id}" />
+    <s:hidden name="redirect_uri" value="%{redirect_uri}"/>
     <s:submit value="click here to authorize"/>
 </s:form>
 

@@ -4,6 +4,7 @@ package com.zts1993.Action.Client;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zts1993.Service.KczlLoginService;
+import net.sf.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -59,11 +60,25 @@ public class LoginAction extends ActionSupport {
         ActionContext.getContext().getSession().put("isLogin", "yes");
 
 
-        if(!redirect_uri_login.equals("")){
-            return "authorize";
+        try {
+            JSONObject jsonObj = JSONObject.fromObject(jsonString);
+//todo fake user action
+
+            log.debug(jsonObj.getString("email"));
+
+
+        } catch (Exception e) {
+            log.debug(e.getStackTrace());
+            return "error";
         }
 
-        return "success";
+        if (!redirect_uri_login.equals("")) {
+            return "authorize";
+        } else {
+            return "success";
+
+        }
+
     }
 
 

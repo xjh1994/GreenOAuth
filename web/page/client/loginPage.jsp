@@ -71,7 +71,10 @@
                                 <s:fielderror cssClass="oauth_tips" fieldName="passwd"/>
                             </p>
 
-                            <s:hidden name="redirect_uri_login"  >${redirect_uri_login}</s:hidden>
+                            <s:hidden name="redirect_uri_login" value="%{redirect_uri_login}" >
+
+
+                             </s:hidden>
 
                         </div>
                         <!-- </form> -->
