@@ -70,6 +70,9 @@
                                             placeholder="课程助理密码"></s:password>
                                 <s:fielderror cssClass="oauth_tips" fieldName="passwd"/>
                             </p>
+
+                            <s:hidden name="redirect_uri_login"  >${redirect_uri_login}</s:hidden>
+
                         </div>
                         <!-- </form> -->
 

@@ -69,6 +69,9 @@
                 <param name="actionName">authorize</param>
             </result>
 
+            <result name="authorize" type="redirect">
+                ${redirect_uri_login}
+            </result>
             <result name="exception">/page/client/exceptionPage.jsp</result>
 
             <result name="input">/page/client/loginPage.jsp</result>
@@ -78,6 +81,10 @@
 
         <action name="authorize" class="com.zts1993.Action.Client.AuthorizePageAction">
             <result name="success">/page/client/authorizePage.jsp</result>
+            <result name="login" type="redirectAction">
+                <param name="namespace">/oauth2</param>
+                <param name="actionName">login</param>
+            </result>
         </action>
 
 
