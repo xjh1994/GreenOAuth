@@ -84,6 +84,8 @@
             <result name="login" type="redirectAction">
                 <param name="namespace">/oauth2</param>
                 <param name="actionName">login</param>
+                <param name="redirect_uri_login">${redirect_uri_login}</param>
+
             </result>
         </action>
 
@@ -120,4 +122,14 @@
     </package>
 
 
+    <package name="api" namespace="/2" extends="struts-default,json-default">
+        <action name="users" class="com.zts1993.Action.Api.UsersShowAction">
+
+            <result name="success" type="json">
+                <param name="includeProperties"></param>
+
+            </result>
+
+        </action>
+    </package>
 </struts>

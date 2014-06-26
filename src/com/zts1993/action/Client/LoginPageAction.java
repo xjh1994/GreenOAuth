@@ -17,7 +17,15 @@ public class LoginPageAction extends ActionSupport{
     }
 
     public String clientName="GreenCMS";
+    private String redirect_uri_login;
 
+    public String getRedirect_uri_login() {
+        return redirect_uri_login;
+    }
+
+    public void setRedirect_uri_login(String redirect_uri_login) {
+        this.redirect_uri_login = redirect_uri_login;
+    }
 
     public String execute() throws Exception {
 
