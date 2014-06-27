@@ -1,11 +1,18 @@
 package com.zts1993.Action.Client;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zts1993.Bean.AuthCodes;
+import com.zts1993.Bean.UserTemp;
+import com.zts1993.Dao.AuthCodesDAO;
+import com.zts1993.Dao.UserTempDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by TianShuo on 14-6-23.
  */
 public class AccessTokenAction extends ActionSupport {
+    private static Logger log = LogManager.getLogger("AccessTokenAction");
 
     /**
      * input param
@@ -97,13 +104,25 @@ public class AccessTokenAction extends ActionSupport {
     }
 
 
-
     public String execute() throws Exception {
 
-        access_token="ACCESS_TOKEN";
-        expires_in="1234";
-        remind_in="798114";
-        uid="12341234";
+
+        log.debug("client_id:" + client_id);
+
+        AuthCodesDAO authCodesDAO = new AuthCodesDAO();
+        AuthCodes authCodes = (AuthCodes) authCodesDAO.findByProperty("clientId", client_id).get(0);
+
+        log.debug("authCodes:" + authCodes.toString());
+
+
+        UserTempDAO userTempDAO = new UserTempDAO();
+        UserTemp userTemp = (UserTemp) userTempDAO.findByProperty("uuid", authCodes.getUuid()).get(0);
+
+        uid = userTemp.getUuid();
+        access_token = authCodes.getCode();
+        remind_in = "" + authCodes.getExpires();
+        expires_in = "" + authCodes.getExpires();
+
 
         return "success";
 
