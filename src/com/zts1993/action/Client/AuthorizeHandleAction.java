@@ -1,6 +1,8 @@
 package com.zts1993.Action.Client;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zts1993.Bean.AuthCodes;
+import com.zts1993.Dao.AuthCodesDAO;
 
 /**
  * Created by TianShuo on 14-6-25.
@@ -47,8 +49,13 @@ public class AuthorizeHandleAction extends ActionSupport {
 
     public String execute() throws Exception {
 
+        AuthCodesDAO authCodesDAO = new AuthCodesDAO();
+        AuthCodes authCodes = (AuthCodes) authCodesDAO.findByProperty("clientId", client_id).get(0);
 
-        redirect_uri_final=redirect_uri+"/code/1561";
+        String code = authCodes.getCode();
+
+        redirect_uri_final = redirect_uri + "/code/" + code;
+
         return "callback";
 
     }

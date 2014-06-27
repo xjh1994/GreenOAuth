@@ -8,6 +8,7 @@ import net.sf.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 /**
  * Created by TianShuo on 14-6-22.
  */
@@ -61,10 +62,12 @@ public class LoginAction extends ActionSupport {
 
 
         try {
-            JSONObject jsonObj = JSONObject.fromObject(jsonString);
-//todo fake user action
 
-            log.debug(jsonObj.getString("email"));
+            //check login is ok
+           // JSONObject jsonObj = JSONObject.fromObject(jsonString);
+
+
+           // log.debug(jsonObj.getString("email"));
 
 
         } catch (Exception e) {

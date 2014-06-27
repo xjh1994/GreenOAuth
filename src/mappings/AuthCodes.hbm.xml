@@ -13,6 +13,16 @@
         <!--<many-to-one name="clients" class="com.zts1993.Bean.Clients" fetch="select">-->
             <!--<column name="client_id" not-null="true" />-->
         <!--</many-to-one>-->
+
+        <property name="clientId" type="java.lang.String">
+            <column name="client_id" length="40" />
+        </property>
+
+        <property name="uuid" type="java.lang.String">
+            <column name="uuid" length="40" />
+        </property>
+
+
         <property name="code" type="java.lang.String">
             <column name="code" length="40" />
         </property>

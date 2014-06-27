@@ -1,9 +1,8 @@
 package com.zts1993.Dao;
 
 import java.util.List;
-import java.util.Set;
 
-import com.zts1993.Bean.Clients;
+import com.zts1993.Bean.UserTemp;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
@@ -12,26 +11,26 @@ import org.slf4j.LoggerFactory;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * Clients entities. Transaction control of the save(), update() and delete()
+ * UserTemp entities. Transaction control of the save(), update() and delete()
  * operations can directly support Spring container-managed transactions or they
  * can be augmented to handle user-managed Spring transactions. Each of these
  * methods provides additional information for how to configure it for the
  * desired type of transaction control.
  * 
- * @see com.zts1993.Bean.Clients
+ * @see com.zts1993.Bean.UserTemp
  * @author MyEclipse Persistence Tools
  */
-public class ClientsDAO extends BaseHibernateDAO {
-	private static final Logger log = LoggerFactory.getLogger(ClientsDAO.class);
+public class UserTempDAO extends BaseHibernateDAO {
+	private static final Logger log = LoggerFactory
+			.getLogger(UserTempDAO.class);
 	// property constants
-	public static final String CLIENT_ID = "clientId";
-	public static final String CLIENT_SECRET = "clientSecret";
-	public static final String REDIRECT_URI = "redirectUri";
-	public static final String USER_ID = "userId";
-	public static final String CLIENT_NAME = "clientName";
+	public static final String UUID = "uuid";
+	public static final String HEAD = "head";
+	public static final String NAME = "name";
+	public static final String NICK = "nick";
 
-	public void save(Clients transientInstance) {
-		log.debug("saving Clients instance");
+	public void save(UserTemp transientInstance) {
+		log.debug("saving UserTemp instance");
 		try {
 			getSession().save(transientInstance);
 			log.debug("save successful");
@@ -41,8 +40,8 @@ public class ClientsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void delete(Clients persistentInstance) {
-		log.debug("deleting Clients instance");
+	public void delete(UserTemp persistentInstance) {
+		log.debug("deleting UserTemp instance");
 		try {
 			getSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -52,11 +51,11 @@ public class ClientsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Clients findById(Long id) {
-		log.debug("getting Clients instance with id: " + id);
+	public UserTemp findById(Long id) {
+		log.debug("getting UserTemp instance with id: " + id);
 		try {
-			Clients instance = (Clients) getSession().get(
-					"com.zts1993.Clients", id);
+			UserTemp instance = (UserTemp) getSession().get(
+					"com.zts1993.UserTemp", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -64,12 +63,10 @@ public class ClientsDAO extends BaseHibernateDAO {
 		}
 	}
 
-
-
-	public List findByExample(Clients instance) {
-		log.debug("finding Clients instance by example");
+	public List findByExample(UserTemp instance) {
+		log.debug("finding UserTemp instance by example");
 		try {
-			List results = getSession().createCriteria("com.zts1993.Clients")
+			List results = getSession().createCriteria("com.zts1993.UserTemp")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -81,10 +78,10 @@ public class ClientsDAO extends BaseHibernateDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Clients instance with property: " + propertyName
+		log.debug("finding UserTemp instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
-			String queryString = "from Clients as model where model."
+			String queryString = "from UserTemp as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -95,30 +92,26 @@ public class ClientsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByClientId(Object clientId) {
-		return findByProperty(CLIENT_ID, clientId);
+	public List findByUuid(Object uuid) {
+		return findByProperty(UUID, uuid);
 	}
 
-	public List findByClientSecret(Object clientSecret) {
-		return findByProperty(CLIENT_SECRET, clientSecret);
+	public List findByHead(Object head) {
+		return findByProperty(HEAD, head);
 	}
 
-	public List findByRedirectUri(Object redirectUri) {
-		return findByProperty(REDIRECT_URI, redirectUri);
+	public List findByName(Object name) {
+		return findByProperty(NAME, name);
 	}
 
-	public List findByUserId(Object userId) {
-		return findByProperty(USER_ID, userId);
-	}
-
-	public List findByClientName(Object clientName) {
-		return findByProperty(CLIENT_NAME, clientName);
+	public List findByNick(Object nick) {
+		return findByProperty(NICK, nick);
 	}
 
 	public List findAll() {
-		log.debug("finding all Clients instances");
+		log.debug("finding all UserTemp instances");
 		try {
-			String queryString = "from Clients";
+			String queryString = "from UserTemp";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -127,10 +120,10 @@ public class ClientsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Clients merge(Clients detachedInstance) {
-		log.debug("merging Clients instance");
+	public UserTemp merge(UserTemp detachedInstance) {
+		log.debug("merging UserTemp instance");
 		try {
-			Clients result = (Clients) getSession().merge(detachedInstance);
+			UserTemp result = (UserTemp) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -139,8 +132,8 @@ public class ClientsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Clients instance) {
-		log.debug("attaching dirty Clients instance");
+	public void attachDirty(UserTemp instance) {
+		log.debug("attaching dirty UserTemp instance");
 		try {
 			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -150,8 +143,8 @@ public class ClientsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachClean(Clients instance) {
-		log.debug("attaching clean Clients instance");
+	public void attachClean(UserTemp instance) {
+		log.debug("attaching clean UserTemp instance");
 		try {
 			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");

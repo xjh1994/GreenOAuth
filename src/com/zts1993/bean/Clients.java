@@ -21,7 +21,20 @@ public class Clients implements java.io.Serializable {
 
 	// Constructors
 
-	/** default constructor */
+    @Override
+    public String toString() {
+        return "Clients{" +
+                "id=" + id +
+                ", clientId='" + clientId + '\'' +
+                ", clientSecret='" + clientSecret + '\'' +
+                ", redirectUri='" + redirectUri + '\'' +
+                ", userId=" + userId +
+                ", clientName='" + clientName + '\'' +
+                ", authCodeses=" + authCodeses +
+                '}';
+    }
+
+    /** default constructor */
 	public Clients() {
 	}
 

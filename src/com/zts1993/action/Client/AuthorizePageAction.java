@@ -2,6 +2,8 @@ package com.zts1993.Action.Client;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.zts1993.Bean.Clients;
+import com.zts1993.Dao.ClientsDAO;
 import net.sf.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +19,15 @@ public class AuthorizePageAction extends ActionSupport {
     private String redirect_uri;
     private String client_id;
 
+    public Clients getClients() {
+        return clients;
+    }
+
+    public void setClients(Clients clients) {
+        this.clients = clients;
+    }
+
+    private Clients clients;
     private String redirect_uri_login;
 
     public String getResponse_type() {
@@ -65,11 +76,15 @@ public class AuthorizePageAction extends ActionSupport {
 
         log.debug("isLogin:" + isLogin);
         log.debug("redirect_uri_login:" + redirect_uri_login);
+        log.debug("client_id:" + client_id);
 
 
+        ClientsDAO clientsDAO=new ClientsDAO();
+
+        Clients clients=(Clients)clientsDAO.findByProperty("clientId",client_id).get(0);
 
 
-
+        log.debug("clients:" + clients.toString());
 
 
         if (isLogin.equals("yes")) {

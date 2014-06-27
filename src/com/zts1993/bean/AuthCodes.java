@@ -1,21 +1,41 @@
 package com.zts1993.Bean;
 
+import java.io.Serializable;
+
 /**
  * AuthCodes entity. @author MyEclipse Persistence Tools
  */
 
-public class AuthCodes implements java.io.Serializable {
+public class AuthCodes implements Serializable {
 
 	// Fields
 
 	private Long id;
 	private Clients clients;
 	private String code;
-	private String redirectUri;
+    private String uuid;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    private String redirectUri;
 	private Integer expires;
 	private String scope;
+	private String clientId;
 
-	// Constructors
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+    // Constructors
 
 	/** default constructor */
 	public AuthCodes() {
@@ -67,7 +87,20 @@ public class AuthCodes implements java.io.Serializable {
 		return this.redirectUri;
 	}
 
-	public void setRedirectUri(String redirectUri) {
+    @Override
+    public String toString() {
+        return "AuthCodes{" +
+                "id=" + id +
+                ", clients=" + clients +
+                ", code='" + code + '\'' +
+                ", redirectUri='" + redirectUri + '\'' +
+                ", expires=" + expires +
+                ", scope='" + scope + '\'' +
+                ", clientId='" + clientId + '\'' +
+                '}';
+    }
+
+    public void setRedirectUri(String redirectUri) {
 		this.redirectUri = redirectUri;
 	}
 

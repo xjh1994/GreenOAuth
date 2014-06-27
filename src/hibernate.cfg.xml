@@ -27,6 +27,7 @@
         <mapping resource="mappings/opinion.cfg.xml"/>
         <mapping resource="mappings/AuthCodes.hbm.xml"/>
         <mapping resource="mappings/Clients.hbm.xml"/>
+        <mapping resource="mappings/UserTemp.hbm.xml"/>
 
         <!--<mapping resource="" />-->
 

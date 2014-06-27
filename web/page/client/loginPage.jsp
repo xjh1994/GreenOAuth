@@ -60,14 +60,14 @@
                             <p class="oauth_login_01">
                                 <label class="oauth_input_label">帐号：</label>
                                 <s:textfield name="userId" cssClass="iptxt oauth_form_input"
-                                             placeholder="课程助理账号"></s:textfield>
+                                             placeholder="GreenCMS账号"></s:textfield>
                                 <s:fielderror  cssClass="oauth_tips"  fieldName="userId"/>
                             </p>
 
                             <p>
                                 <label class="oauth_input_label">密码：</label>
                                 <s:password name="passwd" cssClass="iptxt oauth_form_input"
-                                            placeholder="课程助理密码"></s:password>
+                                            placeholder="GreenCMS密码"></s:password>
                                 <s:fielderror cssClass="oauth_tips" fieldName="passwd"/>
                             </p>
 

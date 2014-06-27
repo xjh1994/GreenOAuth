@@ -2341,13 +2341,14 @@
     </table>
     <table name="auth_codes" schema="" catalog="greenoathu" type="TABLE">
       <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="uuid" sqlType="VARCHAR" length="250" precision="0" nullable="true" jdbcType="12"/>
       <column name="code" sqlType="VARCHAR" length="40" precision="0" nullable="true" jdbcType="12"/>
       <column name="client_id" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
       <column name="redirect_uri" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12"/>
       <column name="expires" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="scope" sqlType="VARCHAR" length="250" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="client1" columns="client_id" ref-table="clients" ref-schema="" ref-catalog="greenoathu" ref-columns="client_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="client1" unique="false" columns="client_id"/>
     </table>
     <table name="clients" schema="" catalog="greenoathu" type="TABLE">
       <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -2357,7 +2358,6 @@
       <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="client_name" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="client1" table="auth_codes" schema="" catalog="greenoathu" columns="client_id"/>
       <index name="client_id" unique="false" columns="client_id"/>
     </table>
     <table name="green_access" schema="" catalog="greenoathu" type="TABLE">
