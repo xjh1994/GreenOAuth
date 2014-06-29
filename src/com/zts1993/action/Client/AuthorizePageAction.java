@@ -4,7 +4,6 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zts1993.Bean.Clients;
 import com.zts1993.Dao.ClientsDAO;
-import net.sf.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
@@ -63,35 +62,32 @@ public class AuthorizePageAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
-        redirect_uri_login = ServletActionContext.getRequest().getRequestURL().toString()+"?"+ServletActionContext.getRequest().getQueryString();
+        redirect_uri_login = ServletActionContext.getRequest().getRequestURL().toString() + "?" + ServletActionContext.getRequest().getQueryString();
 
-        //todo check if it is legal
+
         String isLogin = "";
         try {
             isLogin = ActionContext.getContext().getSession().get("isLogin").toString();
+            String uuid = ActionContext.getContext().getSession().get("uuid").toString();
+
+
         } catch (Exception e) {
-            isLogin = "no";
-
-        }
-
-        log.debug("isLogin:" + isLogin);
-        log.debug("redirect_uri_login:" + redirect_uri_login);
-        log.debug("client_id:" + client_id);
-
-
-        ClientsDAO clientsDAO=new ClientsDAO();
-
-        Clients clients=(Clients)clientsDAO.findByProperty("clientId",client_id).get(0);
-
-
-        log.debug("clients:" + clients.toString());
-
-
-        if (isLogin.equals("yes")) {
-            return "success";
-        } else {
             return "login";
         }
+
+
+        try {
+
+            ClientsDAO clientsDAO = new ClientsDAO();
+            clients = (Clients) clientsDAO.findByProperty("clientId", client_id).get(0);
+            log.debug("clients:" + clients.toString());
+
+        } catch (Exception e) {
+            return "login";
+        }
+
+
+        return "success";
 
 
     }
