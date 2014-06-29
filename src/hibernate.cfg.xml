@@ -8,7 +8,7 @@
 
         <!--need c3po-->
 
-        <property name="connection.url">jdbc:mysql://127.0.0.1/greenoathu</property>
+        <property name="connection.url">jdbc:mysql://127.0.0.1/greenoauth</property>
         <property name="connection.username">zts1993</property>
         <property name="connection.password">262019</property>
         <!-- DB schema will be updated if needed -->

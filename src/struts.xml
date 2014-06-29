@@ -24,7 +24,7 @@
             <result name="404">/page/error/404.jsp</result>
         </global-results>
         <global-exception-mappings>
-            <exception-mapping exception="java.sql.SQLException" result="sql" />
+            <exception-mapping exception="java.sql.SQLException" result="sql"/>
         </global-exception-mappings>
         <action name="index" class="com.zts1993.Action.Admin.IndexAction" method="indexPage">
             <result name="success">/page/admin/indexPage.jsp</result>
@@ -85,7 +85,6 @@
                 <param name="namespace">/oauth2</param>
                 <param name="actionName">login</param>
                 <param name="redirect_uri_login">${redirect_uri_login}</param>
-
             </result>
         </action>
 
@@ -95,6 +94,8 @@
             <result name="callback" type="redirect">
                 ${redirect_uri_final}
             </result>
+            <result name="exception">/page/client/exceptionPage.jsp</result>
+
         </action>
 
         <action name="access_token" class="com.zts1993.Action.Client.AccessTokenAction">
@@ -132,4 +133,5 @@
 
         </action>
     </package>
+
 </struts>

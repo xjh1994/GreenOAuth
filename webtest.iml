@@ -56,6 +56,7 @@
     <orderEntry type="library" name="log4j" level="project" />
     <orderEntry type="library" name="struts2-json-plugin" level="project" />
     <orderEntry type="library" name="json-lib-2.4-jdk15" level="project" />
+    <orderEntry type="library" name="commons-lang" level="project" />
   </component>
 </module>
 

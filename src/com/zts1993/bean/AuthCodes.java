@@ -8,11 +8,11 @@ import java.io.Serializable;
 
 public class AuthCodes implements Serializable {
 
-	// Fields
+    // Fields
 
-	private Long id;
-	private Clients clients;
-	private String code;
+    private Long id;
+    private Clients clients;
+    private String code;
     private String uuid;
 
     public String getUuid() {
@@ -24,9 +24,9 @@ public class AuthCodes implements Serializable {
     }
 
     private String redirectUri;
-	private Integer expires;
-	private String scope;
-	private String clientId;
+    private Integer expires;
+    private String scope;
+    private String clientId;
 
     public String getClientId() {
         return clientId;
@@ -37,55 +37,81 @@ public class AuthCodes implements Serializable {
     }
     // Constructors
 
-	/** default constructor */
-	public AuthCodes() {
-	}
+    /**
+     * default constructor
+     */
+    public AuthCodes() {
+    }
 
-	/** minimal constructor */
-	public AuthCodes(Clients clients, String redirectUri) {
-		this.clients = clients;
-		this.redirectUri = redirectUri;
-	}
+    /**
+     * minimal constructor
+     */
+    public AuthCodes(Clients clients, String redirectUri) {
+        this.clients = clients;
+        this.redirectUri = redirectUri;
+    }
 
-	/** full constructor */
-	public AuthCodes(Clients clients, String code, String redirectUri,
-			Integer expires, String scope) {
-		this.clients = clients;
-		this.code = code;
-		this.redirectUri = redirectUri;
-		this.expires = expires;
-		this.scope = scope;
-	}
+    public AuthCodes(Long id, Clients clients, String code, String uuid, String redirectUri, Integer expires, String scope, String clientId) {
+        this.id = id;
+        this.clients = clients;
+        this.code = code;
+        this.uuid = uuid;
+        this.redirectUri = redirectUri;
+        this.expires = expires;
+        this.scope = scope;
+        this.clientId = clientId;
+    }
 
-	// Property accessors
+// Property accessors
 
-	public Long getId() {
-		return this.id;
-	}
+    public Long getId() {
+        return this.id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Clients getClients() {
-		return this.clients;
-	}
+    public Clients getClients() {
+        return this.clients;
+    }
 
-	public void setClients(Clients clients) {
-		this.clients = clients;
-	}
+    public void setClients(Clients clients) {
+        this.clients = clients;
+    }
 
-	public String getCode() {
-		return this.code;
-	}
+    public String getCode() {
+        return this.code;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getRedirectUri() {
-		return this.redirectUri;
-	}
+    public String getRedirectUri() {
+        return this.redirectUri;
+    }
+
+
+    public void setRedirectUri(String redirectUri) {
+        this.redirectUri = redirectUri;
+    }
+
+    public Integer getExpires() {
+        return this.expires;
+    }
+
+    public void setExpires(Integer expires) {
+        this.expires = expires;
+    }
+
+    public String getScope() {
+        return this.scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
 
     @Override
     public String toString() {
@@ -93,31 +119,11 @@ public class AuthCodes implements Serializable {
                 "id=" + id +
                 ", clients=" + clients +
                 ", code='" + code + '\'' +
+                ", uuid='" + uuid + '\'' +
                 ", redirectUri='" + redirectUri + '\'' +
                 ", expires=" + expires +
                 ", scope='" + scope + '\'' +
                 ", clientId='" + clientId + '\'' +
                 '}';
     }
-
-    public void setRedirectUri(String redirectUri) {
-		this.redirectUri = redirectUri;
-	}
-
-	public Integer getExpires() {
-		return this.expires;
-	}
-
-	public void setExpires(Integer expires) {
-		this.expires = expires;
-	}
-
-	public String getScope() {
-		return this.scope;
-	}
-
-	public void setScope(String scope) {
-		this.scope = scope;
-	}
-
 }

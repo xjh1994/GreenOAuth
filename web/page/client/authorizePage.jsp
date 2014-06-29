@@ -20,7 +20,6 @@
 </head>
 
 
-
 <body class="UIbody widgets">
 <div class="xline1 oauth_xline" id="outer">
     <div class="oauth_wrap">
@@ -35,22 +34,42 @@
 
             <s:form action="authorizeHandle" method="post" id="loginForm">
 
-                <s:hidden name="client_id" value="%{client_id}" />
+                <s:hidden name="client_id" value="%{client_id}"/>
                 <s:hidden name="redirect_uri" value="%{redirect_uri}"/>
 
-                <div class="oauth_content" node-type="commonlogin">
+                <div class="oauth_content">
                     <p class="oauth_main_info">
-                        授权 <a href="{$应用URL}" target="_blank" class="app_name">
-                            ${clients.clientName}</a> 访问你的GreenCMS帐号
+
+                    <h2> 授权 <a href="#" target="_blank" class="app_name">
+                        <s:property value="%{#clients.clientName}"/>
+                            ${clients.clientName}
+                    </a> 访问你的GreenStudio帐号
+                    </h2>
+
                     </p>
+
+
                 </div>
+
+                <div class="oauth_access clearfix">
+                    <p>
+
+                    <h3>所需权限:</h3>
+                    <ul>
+                        <li>获取用户名，邮箱等基本信息</li>
+                    </ul>
+                    </p>
+
+                </div>
+
 
 
                 <div class="oauth_login_box01 clearfix">
                     <div class="oauth_login_submit">
                         <p class="oauth_formbtn">
-                            <s:submit value="click here to authorize" cssClass="btn_login formbtn_01"
-                                    cssStyle="width: 201px;"  />
+                            <s:submit value="确认授权"
+                                      cssClass="btn_login formbtn_01"
+                                      cssStyle="width: 201px;"/>
                         </p>
                     </div>
                 </div>

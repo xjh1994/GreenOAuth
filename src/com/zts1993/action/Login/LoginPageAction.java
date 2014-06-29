@@ -8,7 +8,6 @@ public class LoginPageAction {
     public String execute() throws Exception {
 
 
-
         return "success";
 
     }

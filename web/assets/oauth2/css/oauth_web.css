@@ -95,7 +95,7 @@ body a, .linkA a, .linkA {
     width: 140px;
     height: 44px;
     background: url(../images/logo.png);
-     line-height: 200px;
+    line-height: 200px;
     overflow: hidden
 }
 
@@ -458,8 +458,6 @@ a.ctl_nxt_dis {
     text-align: right
 }
 
- 
-
 .pages_minibtn .reverse {
     margin: 0 7px 0 0;
     background-position: -100px -20px !important
@@ -524,70 +522,66 @@ a.ctl_nxt_dis {
     width: 66px;
     overflow: hidden;
     zoom: 1;
- 
- display: inline-block;
-padding: 6px 12px;
-margin-bottom: 0;
-font-size: 18px;
-text-align: center;
-white-space: nowrap;
-vertical-align: middle;
-cursor: pointer;
- font-weight: 500;
 
- color: #333;
-background-color: #ebebeb;
-border-color: #adadad;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 18px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    font-weight: 500;
 
+    color: #333;
+    background-color: #ebebeb;
+    border-color: #adadad;
 
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 
- border: 1px solid transparent;
-border-radius: 4px;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
--o-user-select: none;
-user-select: none;
-
-
- 	
- -webkit-border-radius: 3px;
--moz-border-radius: 3px;
-border-radius: 3px;
-border: 1px solid transparent;
--webkit-box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.09);
--moz-box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.09);
-box-shadow: inset 0px -1px 0px 0px rgba(0, 0, 0, 0.09);
-
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    -webkit-box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.09);
+    box-shadow: inset 0px -1px 0px 0px rgba(0, 0, 0, 0.09);
 
 }
 
 .btn_login {
-   background-color: #f4543c!important;
-   color:#ffffff!important;
+    background-color: #f4543c !important;
+    color: #ffffff !important;
 
 }
+
 .btn_login:hover {
-      background-color: #CF250C!important;
+    background-color: #CF250C !important;
 
 }
 
 .btn_login:active {
-       background-color: #f4543c!important;
+    background-color: #f4543c !important;
 
 }
 
 .btn_cancel {
-background-color: #E4E4E4!important;
-color: #5A5A5A!important;
+    background-color: #E4E4E4 !important;
+    color: #5A5A5A !important;
 }
 
 .btn_cancel:hover {
-background-color: #E9E7E7!important;
+    background-color: #E9E7E7 !important;
 }
 
 .btn_cancel:active {
-background-color: #E9E7E7!important;
+    background-color: #E9E7E7 !important;
 }
 
 .btn_oauth {
@@ -896,8 +890,6 @@ background-color: #E9E7E7!important;
     z-index: -1
 }
 
- 
- 
 .panel {
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -1419,6 +1411,30 @@ a.text2, .text2 {
     padding: 10px 18px 0 20px
 }
 
+.oauth_access {
+    padding: 30px 30px 30px 30px;
+}
+
+.oauth_access h3 {
+    font-size: 20px;
+    color: #1D8B01;
+
+    padding:10px 10px 10px 0px;
+
+}
+
+
+.oauth_access ul {
+    font-size:15px;
+
+    padding:10px 10px 10px 20px;
+
+}
+
+.oauth_access li {
+    list-style: square;
+}
+
 .oauth_main_info {
     margin-bottom: 27px;
     padding-top: 5px
@@ -1830,7 +1846,7 @@ a.text2, .text2 {
     padding: 0 0 20px 0;
     text-align: center
 }
- 
+
 .tips_qrcode_scan_success {
     left: -30px;
     top: -16px

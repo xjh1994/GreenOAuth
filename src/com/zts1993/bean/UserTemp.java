@@ -1,10 +1,12 @@
 package com.zts1993.Bean;
 
+import java.io.Serializable;
+
 /**
  * UserTemp entity. @author MyEclipse Persistence Tools
  */
 
-public class UserTemp implements java.io.Serializable {
+public class UserTemp implements Serializable {
 
 	// Fields
 
@@ -13,20 +15,41 @@ public class UserTemp implements java.io.Serializable {
 	private String head;
 	private String name;
 	private String nick;
+    private String hash;
+    private String other;
 
-	// Constructors
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public UserTemp(Long id, String uuid, String head, String name, String nick, String hash, String other) {
+        this.id = id;
+        this.uuid = uuid;
+        this.head = head;
+        this.name = name;
+        this.nick = nick;
+        this.hash = hash;
+        this.other = other;
+    }
+    // Constructors
 
 	/** default constructor */
 	public UserTemp() {
 	}
 
-	/** full constructor */
-	public UserTemp(String uuid, String head, String name, String nick) {
-		this.uuid = uuid;
-		this.head = head;
-		this.name = name;
-		this.nick = nick;
-	}
+
 
 	// Property accessors
 
@@ -50,16 +73,6 @@ public class UserTemp implements java.io.Serializable {
 		return this.head;
 	}
 
-    @Override
-    public String toString() {
-        return "UserTemp{" +
-                "id=" + id +
-                ", uuid='" + uuid + '\'' +
-                ", head='" + head + '\'' +
-                ", name='" + name + '\'' +
-                ", nick='" + nick + '\'' +
-                '}';
-    }
 
     public void setHead(String head) {
 		this.head = head;
@@ -81,4 +94,17 @@ public class UserTemp implements java.io.Serializable {
 		this.nick = nick;
 	}
 
+
+    @Override
+    public String toString() {
+        return "UserTemp{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", head='" + head + '\'' +
+                ", name='" + name + '\'' +
+                ", nick='" + nick + '\'' +
+                ", hash='" + hash + '\'' +
+                ", other='" + other + '\'' +
+                '}';
+    }
 }

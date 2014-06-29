@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1332252731">
-    <data-source source="LOCAL" name="MySQL - greenoathu@localhost" uuid="e50a40ec-002f-4300-95f9-7a8e012ccb29">
+  <component name="DataSourceManagerImpl" format="xml" hash="588528110">
+    <data-source source="LOCAL" name="MySQL - greenoauth@localhost" uuid="e50a40ec-002f-4300-95f9-7a8e012ccb29">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/greenoathu</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/greenoauth</jdbc-url>
       <user-name>root</user-name>
       <driver-properties>
         <property name="zeroDateTimeBehavior" value="convertToNull" />

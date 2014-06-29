@@ -113,14 +113,14 @@ public class KczlLoginService {
                 return "exception";
             }
         } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
+
              strResult=e.getMessage();
 
              e.printStackTrace();
             return "exception";
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+
              strResult=e.getMessage();
             e.printStackTrace();
             return "exception";

@@ -31,9 +31,9 @@
 
                 <div class="oauth_content" node-type="commonlogin">
                     <p class="oauth_main_info">
-                        授权 <a href="{$应用URL}" target="_blank" class="app_name">
+                        授权 <a href="#" target="_blank" class="app_name">
                         <s:property value="clientName"/>
-                    </a> 访问你的{$服务商名称}帐号
+                    </a> 访问你的GreenStudio帐号
                     </p>
 
                     <!-- 登录 -->
@@ -60,14 +60,14 @@
                             <p class="oauth_login_01">
                                 <label class="oauth_input_label">帐号：</label>
                                 <s:textfield name="userId" cssClass="iptxt oauth_form_input"
-                                             placeholder="GreenCMS账号"></s:textfield>
+                                             placeholder="GreenStudio 账号"></s:textfield>
                                 <s:fielderror  cssClass="oauth_tips"  fieldName="userId"/>
                             </p>
 
                             <p>
                                 <label class="oauth_input_label">密码：</label>
                                 <s:password name="passwd" cssClass="iptxt oauth_form_input"
-                                            placeholder="GreenCMS密码"></s:password>
+                                            placeholder="GreenStudio 密码"></s:password>
                                 <s:fielderror cssClass="oauth_tips" fieldName="passwd"/>
                             </p>
 

@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 <!---->
-    <class name="com.zts1993.Bean.GreenOptions" table="green_options" schema="" catalog="greenoathu">
+    <class name="com.zts1993.Bean.GreenOptions" table="green_options" schema="" catalog="greenoauth">
         <id name="optionId" type="java.lang.Long">
             <column name="option_id" />
             <generator class="native" />

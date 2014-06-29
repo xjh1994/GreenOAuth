@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="MySQL - greenoathu@localhost" uuid="e50a40ec-002f-4300-95f9-7a8e012ccb29">
+  <data-source source="LOCAL" name="MySQL - greenoauth@localhost" uuid="e50a40ec-002f-4300-95f9-7a8e012ccb29">
     <database-info product="MySQL" version="5.6.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.29 ( Revision: alexander.soklakov@oracle.com-20140120140810-s44574olh90i6i4l )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
@@ -17,7 +17,7 @@
     <schema name="" catalog="greenapi"/>
     <schema name="" catalog="greenbbs"/>
     <schema name="" catalog="greencms-sae"/>
-    <schema name="" catalog="greenoathu"/>
+    <schema name="" catalog="greenoauth"/>
     <schema name="" catalog="greenstudio"/>
     <schema name="" catalog="hotel"/>
     <schema name="" catalog="huihuxi"/>
@@ -2339,7 +2339,7 @@
       <column name="subscribe_time" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="weixin_userid"/>
     </table>
-    <table name="auth_codes" schema="" catalog="greenoathu" type="TABLE">
+    <table name="auth_codes" schema="" catalog="greenoauth" type="TABLE">
       <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="uuid" sqlType="VARCHAR" length="250" precision="0" nullable="true" jdbcType="12"/>
       <column name="code" sqlType="VARCHAR" length="40" precision="0" nullable="true" jdbcType="12"/>
@@ -2350,7 +2350,7 @@
       <primary-key name="PRIMARY" columns="id"/>
       <index name="client1" unique="false" columns="client_id"/>
     </table>
-    <table name="clients" schema="" catalog="greenoathu" type="TABLE">
+    <table name="clients" schema="" catalog="greenoauth" type="TABLE">
       <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="client_id" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
       <column name="client_secret" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
@@ -2360,7 +2360,7 @@
       <primary-key name="PRIMARY" columns="id"/>
       <index name="client_id" unique="false" columns="client_id"/>
     </table>
-    <table name="green_access" schema="" catalog="greenoathu" type="TABLE">
+    <table name="green_access" schema="" catalog="greenoauth" type="TABLE">
       <column name="role_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" def="MQ=="/>
       <column name="node_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5"/>
       <column name="level" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6"/>
@@ -2369,7 +2369,7 @@
       <index name="groupId" unique="false" columns="role_id"/>
       <index name="nodeId" unique="false" columns="node_id"/>
     </table>
-    <table name="green_options" schema="" catalog="greenoathu" type="TABLE">
+    <table name="green_options" schema="" catalog="greenoauth" type="TABLE">
       <column name="option_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="option_name" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="option_value" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12"/>
@@ -2377,7 +2377,7 @@
       <primary-key name="PRIMARY" columns="option_id"/>
       <index name="option_name" unique="true" columns="option_name"/>
     </table>
-    <table name="green_role" schema="" catalog="greenoathu" type="TABLE">
+    <table name="green_role" schema="" catalog="greenoauth" type="TABLE">
       <column name="id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" autoIncrement="true"/>
       <column name="name" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
       <column name="pid" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5"/>
@@ -2388,14 +2388,14 @@
       <index name="pid" unique="false" columns="pid"/>
       <index name="status" unique="false" columns="status"/>
     </table>
-    <table name="green_role_users" schema="" catalog="greenoathu" type="TABLE">
+    <table name="green_role_users" schema="" catalog="greenoauth" type="TABLE">
       <column name="role_id" sqlType="MEDIUMINT UNSIGNED" length="8" precision="0" nullable="true" jdbcType="4"/>
       <column name="user_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
       <primary-key name="PRIMARY" columns="user_id"/>
       <index name="group_id" unique="false" columns="role_id"/>
       <index name="user_id" unique="false" columns="user_id"/>
     </table>
-    <table name="green_user" schema="" catalog="greenoathu" type="TABLE">
+    <table name="green_user" schema="" catalog="greenoauth" type="TABLE">
       <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="user_login" sqlType="VARCHAR" length="60" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="user_pass" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
@@ -2412,13 +2412,15 @@
       <index name="user_login_key" unique="false" columns="user_login"/>
       <index name="user_nicename" unique="false" columns="user_nicename"/>
     </table>
-    <table name="user_cache" schema="" catalog="greenoathu" type="TABLE">
-      <column name="uc_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <column name="uc_name" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="uc_pass" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="uc_info" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="uc_token" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="uc_id"/>
+    <table name="user_temp" schema="" catalog="greenoauth" type="TABLE">
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="uuid" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
+      <column name="head" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="nick" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="hash" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="other" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="access" schema="" catalog="greenstudio" type="TABLE">
       <column name="role_id" sqlType="SMALLINT UNSIGNED" length="5" precision="0" nullable="false" jdbcType="5" def="MQ=="/>
