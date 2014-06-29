@@ -52,10 +52,44 @@ public class ClientsDAO extends BaseHibernateDAO {
     public void delete(Clients persistentInstance) {
         log.debug("deleting Clients instance");
         try {
-            getSession().delete(persistentInstance);
-            log.debug("delete successful");
+            Session session = getSession();
+            Transaction tx = session.beginTransaction();
+            session.delete(persistentInstance);
+            tx.commit();
+            session.close();
+             log.debug("delete successful");
         } catch (RuntimeException re) {
             log.error("delete failed", re);
+            throw re;
+        }
+    }
+
+    public void saveOrUpdate(Clients transientInstance) {
+        log.debug("updating Client instance");
+        try {
+            Session session = getSession();
+            Transaction tx = session.beginTransaction();
+            session.saveOrUpdate(transientInstance);
+            tx.commit();
+            session.close();
+            log.debug("save successful");
+        } catch (RuntimeException re) {
+            log.error("save failed", re);
+            throw re;
+        }
+    }
+
+    public void update(Clients transientInstance) {
+        log.debug("updating Client instance");
+        try {
+            Session session = getSession();
+            Transaction tx = session.beginTransaction();
+            session.update(transientInstance);
+            tx.commit();
+            session.close();
+            log.debug("save successful");
+        } catch (RuntimeException re) {
+            log.error("save failed", re);
             throw re;
         }
     }

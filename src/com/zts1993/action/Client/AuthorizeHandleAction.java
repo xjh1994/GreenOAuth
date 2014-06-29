@@ -64,7 +64,7 @@ public class AuthorizeHandleAction extends ActionSupport {
             List<AuthCodes> authCodesList = authCodesDAO.findByUuidAndClientId(uuid, client_id);
             if (authCodesList.size() == 0) {
 
-                //首次使用
+
                 UserTempDAO userTempDAO = new UserTempDAO();
                 List<UserTemp> userTempList = userTempDAO.findByUuid(uuid);
                 UserTemp userTemp = userTempList.get(0);
