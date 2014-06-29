@@ -49,6 +49,7 @@
                                     <th>clientId</th>
                                     <th>clientName</th>
                                     <th>clientSecret</th>
+                                    <th>action</th>
 
                                 </tr>
                                 </thead>
@@ -58,6 +59,19 @@
                                         <th><s:property value="#client.clientId"/></th>
                                         <th><s:property value="#client.clientName"/></th>
                                         <th><s:property value="#client.clientSecret"/></th>
+                                        <th>
+                                            &nbsp;
+                                            <s:a namespace="/admin" action="clientEdit">
+                                                <s:param name="clientId" value="#client.clientId"/>
+                                                Edit
+                                            </s:a>
+                                            &nbsp; |&nbsp;
+                                            <s:a namespace="/admin" action="clientDelHandle">
+                                                <s:param name="clientId" value="#client.clientId"/>
+                                                Delete
+                                            </s:a>
+                                            &nbsp;
+                                        </th>
                                     </tr>
                                 </s:iterator>
                                 </tbody>

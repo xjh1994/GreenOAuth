@@ -25,9 +25,12 @@
             <result name="exception">/page/client/exceptionPage.jsp</result>
 
         </global-results>
+
         <global-exception-mappings>
             <exception-mapping exception="java.sql.SQLException" result="sql"/>
         </global-exception-mappings>
+
+
         <action name="index" class="com.zts1993.Action.Admin.IndexAction" method="indexPage">
             <result name="success">/page/admin/indexPage.jsp</result>
         </action>
@@ -41,13 +44,37 @@
             <result name="success">/page/admin/client/clientAddPage.jsp</result>
         </action>
 
-
         <action name="clientAddHandle" class="com.zts1993.Action.Admin.Client.ClientAddHandleAction" >
             <result name="success" type="redirectAction">
                 <param name="namespace">/admin</param>
                 <param name="actionName">clientList</param>
             </result>
         </action>
+
+        <action name="clientDelHandle" class="com.zts1993.Action.Admin.Client.ClientDelHandleAction">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/admin</param>
+                <param name="actionName">clientList</param>
+            </result>
+        </action>
+
+
+        <action name="clientEdit" class="com.zts1993.Action.Admin.Client.ClientEditAction">
+            <result name="success">/page/admin/client/clientEditPage.jsp</result>
+        </action>
+
+        <action name="clientEditHandle" class="com.zts1993.Action.Admin.Client.ClientEditHandleAction">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/admin</param>
+                <param name="actionName">clientList</param>
+            </result>
+        </action>
+
+
+        <action name="authCodesList" class="com.zts1993.Action.Admin.AuthCodes.AuthCodesListAction" >
+            <result name="success">/page/admin/authCodes/authCodesListAction.jsp</result>
+        </action>
+
 
 
 
