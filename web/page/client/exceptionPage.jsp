@@ -18,7 +18,7 @@
     </style>-->
 </head>
 <body class="UIbody widgets">
- 授权出错
+<s:property value="exceptionStack"/>
 </body>
 </html>
 

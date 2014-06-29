@@ -37,13 +37,13 @@
                 <div class="col-md-12">
                     <div class="box box-warning">
                         <div class="box-header">
-                            <h3 class="box-title">{$action}</h3>
+                            <h3 class="box-title">首页</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
 
 
-                            empty
+                            暂无内容
 
 
                         </div>

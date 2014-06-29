@@ -1,15 +1,14 @@
 package com.zts1993.Dao;
 
 import com.zts1993.Bean.UserTemp;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Example;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Example;
+
 import java.util.List;
 
 /**
@@ -39,8 +38,8 @@ public class UserTempDAO extends BaseHibernateDAO {
     public void save(UserTemp transientInstance) {
         log.debug("saving UserTemp instance");
         try {
-            Session session=getSession();
-            Transaction tx=session.beginTransaction();
+            Session session = getSession();
+            Transaction tx = session.beginTransaction();
             session.save(transientInstance);
             tx.commit();
             session.close();

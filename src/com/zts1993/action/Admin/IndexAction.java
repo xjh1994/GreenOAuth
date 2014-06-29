@@ -16,6 +16,8 @@ public class IndexAction extends ActionSupport {
     public String applicationPage() throws Exception {
 
 
+
+
         return "success";
 
     }

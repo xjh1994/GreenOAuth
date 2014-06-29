@@ -22,6 +22,8 @@
         <global-results>
             <result name="sql">/page/error/sql.jsp</result>
             <result name="404">/page/error/404.jsp</result>
+            <result name="exception">/page/client/exceptionPage.jsp</result>
+
         </global-results>
         <global-exception-mappings>
             <exception-mapping exception="java.sql.SQLException" result="sql"/>
@@ -30,10 +32,24 @@
             <result name="success">/page/admin/indexPage.jsp</result>
         </action>
 
-
-        <action name="application" class="com.zts1993.Action.Admin.IndexAction" method="applicationPage">
-            <result name="success">/page/admin/applicationPage.jsp</result>
+        <action name="clientList" class="com.zts1993.Action.Admin.Client.ClientListAction" >
+            <result name="success">/page/admin/client/clientListPage.jsp</result>
         </action>
+
+
+        <action name="clientAdd" class="com.zts1993.Action.Admin.Client.ClientAddAction" >
+            <result name="success">/page/admin/client/clientAddPage.jsp</result>
+        </action>
+
+
+        <action name="clientAddHandle" class="com.zts1993.Action.Admin.Client.ClientAddHandleAction" >
+            <result name="success" type="redirectAction">
+                <param name="namespace">/admin</param>
+                <param name="actionName">clientList</param>
+            </result>
+        </action>
+
+
 
 
     </package>

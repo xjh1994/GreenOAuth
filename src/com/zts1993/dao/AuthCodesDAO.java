@@ -1,13 +1,16 @@
 package com.zts1993.Dao;
 
 import com.zts1993.Bean.AuthCodes;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+
+
 
 import java.util.List;
 
@@ -23,8 +26,8 @@ import java.util.List;
  * @see com.zts1993.Bean.AuthCodes
  */
 public class AuthCodesDAO extends BaseHibernateDAO {
-    private static final Logger log = LoggerFactory
-            .getLogger(AuthCodesDAO.class);
+    private static Logger log = LogManager.getLogger("AuthCodesDAO");
+
     // property constants
     public static final String CODE = "code";
     public static final String REDIRECT_URI = "redirectUri";

@@ -21,6 +21,7 @@ import org.hibernate.criterion.Example;
  * @see com.zts1993.Bean.GreenUser
  */
 public class GreenUserDAO extends BaseHibernateDAO {
+
     private static Logger log = LogManager.getLogger("GreenUserDAO");
 //    private static final Logger log = LoggerFactory
 //            .getLogger(GreenOptionsDAO.class);
